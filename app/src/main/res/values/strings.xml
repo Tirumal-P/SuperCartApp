@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SuperCartApp</string>
+    <string name="login_text">LOGIN</string>
+    <string name="email_id_text">Email Id</string>
+    <string name="tv_password_text">Password</string>
+    <string name="forgot_password_text">FORGOT PASSWORD</string>
+    <string name="text_register_user">I DONT HAVE AN ACCOUNT</string>
+    <string name="text_full_name">Full Name</string>
+    <string name="text_mobile_number">Mobile No.</string>
+    <string name="text_email_id">Email Id</string>
+    <string name="text_register">REGISTER</string>
+    <string name="text_existing_account">I HAVE AN ACCOUNT</string>
+    <string name="text_submit">SUBMIT</string>
+    <string name="text_re_enter_password">Re-Enter Password</string>
+    <string name="text_new_password">New Password</string>
+    <string name="text_enter_your_email_id">Enter your Email Id</string>
+    <string name="text_continue">CONTINUE</string>
+    <string name="text_home">Home</string>
+    <string name="text_cart">Cart</string>
+    <string name="text_profile">Profile</string>
+    <string name="text_orders">Orders</string>
+    <string name="text_log_out">Logout</string>
+    <string name="text_menu">Menu</string>
+    <string name="text_search">Search</string>
+    <string name="text_welcome">Welcome User</string>
+    <string name="text_user_email">User Email Id</string>
+    <string name="text_user_phone">User Phone No.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

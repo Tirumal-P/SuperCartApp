@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="side_nav_item_view">
+        <item name="android:textSize">@dimen/header4_size</item>
+    </style>
+</resources>
