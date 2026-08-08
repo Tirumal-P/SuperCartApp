@@ -19,6 +19,32 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+# Activity / Fragment
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version = "1.8.9" }
+
+# Lifecycle / MVVM
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.9.2" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version = "2.9.2" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version = "2.9.2" }
+
+# Navigation Component
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.9.3" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.9.3" }
+
+# Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.11.0" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version = "2.11.0" }
+
+# OkHttp
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.12.0" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version = "4.12.0" }
+
+# Glide
+glide = { module = "com.github.bumptech.glide:glide", version = "4.16.0" }
+
+# Coroutines
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.10.2" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 

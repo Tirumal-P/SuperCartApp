@@ -15,4 +15,5 @@
     <dimen name="view_divider_height">1dp</dimen>
     <dimen name="side_nav_layout_padding">12dp</dimen>
     <dimen name="side_nav_item_padding">0dp</dimen>
+    <dimen name="search_layout_margin">5dp</dimen>
 </resources>

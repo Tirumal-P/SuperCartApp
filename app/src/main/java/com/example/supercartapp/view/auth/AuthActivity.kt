@@ -1,4 +1,4 @@
-package com.example.supercartapp.auth
+package com.example.supercartapp.view.auth
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

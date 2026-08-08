@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperCartApp" >
         <activity
-            android:name=".auth.AuthActivity"
+            android:name=".view.auth.AuthActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.example.supercartapp
+package com.example.supercartapp.view
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.supercartapp.R
 import com.example.supercartapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,13 +26,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpSideNav() {
         with(binding) {
-            bottomNav.setOnItemSelectedListener { menu ->
+            bnBottomNav.setOnItemSelectedListener { menu ->
                 when (menu.itemId) {
                     R.id.menu_menu -> {
-                        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                            drawerLayout.closeDrawer(GravityCompat.END)
+                        if (main.isDrawerOpen(GravityCompat.END)) {
+                            main.closeDrawer(GravityCompat.END)
                         }else{
-                            drawerLayout.openDrawer(GravityCompat.END)
+                            main.openDrawer(GravityCompat.END)
                         }
                     }
                 }
