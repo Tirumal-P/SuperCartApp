@@ -8,37 +8,28 @@ import androidx.lifecycle.viewModelScope
 import com.example.supercartapp.model.response.CategoryItem
 import com.example.supercartapp.repository.SuperCartRepository
 import com.example.supercartapp.util.ApiType
+import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(val repository: SuperCartRepository): ViewModel() {
 
-    private val _categories = MutableLiveData<List<CategoryItem>>()
-    val categories: LiveData<List<CategoryItem>>
+    private val _categories = MutableLiveData<UiState<List<CategoryItem>>>()
+    val categories: LiveData<UiState<List<CategoryItem>>>
         get() = _categories
-
-    private val _errorLiveData = MutableLiveData<String>()
-    val errorLiveData: LiveData<String>
-        get() = _errorLiveData
-
-    private val _processLoading = MutableLiveData<Boolean>()
-    val processLoading: LiveData<Boolean>
-        get() = _processLoading
 
     fun getCategories(){
         viewModelScope.launch(Dispatchers.IO) {
             try{
-                _processLoading.postValue(true)
+                _categories.postValue(UiState.Loading)
                 val categoryResponse = repository.getCategories()
                 if(categoryResponse.status!=0){
-                    _errorLiveData.postValue("${categoryResponse.message} to Get ${ApiType.CATEGORY.displayName} ")
+                    _categories.postValue(UiState.Error("${categoryResponse.message} to Get ${ApiType.CATEGORY.displayName} "))
                 }else{
-                    _categories.postValue(categoryResponse.categories)
+                    _categories.postValue(UiState.Success(categoryResponse.categories))
                 }
-            }catch (e: Error){
-                throw e
-            }finally {
-                _processLoading.postValue(false)
+            }catch (e: Exception){
+                _categories.postValue(UiState.Error(e.message?:"Something Went Wrong"))
             }
         }
     }

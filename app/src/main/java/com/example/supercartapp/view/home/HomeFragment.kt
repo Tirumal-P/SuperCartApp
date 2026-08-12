@@ -9,6 +9,9 @@ import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentHomeBinding
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
+import com.example.supercartapp.util.UiState
+import com.example.supercartapp.util.hide
+import com.example.supercartapp.util.show
 import com.example.supercartapp.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -28,23 +31,47 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUpObservers() {
-        homeViewModel.categories.observe(viewLifecycleOwner){
-            categoryAdapter.submitList(it)
-        }
+//        homeViewModel.categories.observe(viewLifecycleOwner){
+//            categoryAdapter.submitList(it)
+//        }
+//
+//        homeViewModel.processLoading.observe(viewLifecycleOwner){
+//            if(it) {
+//                binding.pbCategoryProgress.show()
+//                binding.tvErrorText.show()
+//            }
+//            else {
+//                binding.pbCategoryProgress.hide()
+//                binding.tvErrorText.show()
+//            }
+//        }
+//
+//        homeViewModel.errorLiveData.observe(viewLifecycleOwner){
+//            binding.tvErrorText.text = it
+//        }
+        with(binding) {
+            homeViewModel.categories.observe(viewLifecycleOwner) {
+                when (it) {
+                    is UiState.Success -> {
+                        categoryAdapter.submitList(it.data)
+                        tvErrorText.hide()
+                        pbCategoryProgress.hide()
+                        rvCategoryList.show()
+                    }
 
-        homeViewModel.processLoading.observe(viewLifecycleOwner){
-            if(it) {
-                binding.pbCategoryProgress.visibility = View.VISIBLE
-                binding.tvErrorText.visibility = View.VISIBLE
-            }
-            else {
-                binding.pbCategoryProgress.visibility = View.GONE
-                binding.tvErrorText.visibility = View.VISIBLE
-            }
-        }
+                    is UiState.Loading -> {
+                        tvErrorText.hide()
+                        pbCategoryProgress.show()
+                    }
 
-        homeViewModel.errorLiveData.observe(viewLifecycleOwner){
-            binding.tvErrorText.text = it
+                    is UiState.Error -> {
+                        tvErrorText.text = it.message
+                        tvErrorText.show()
+                        pbCategoryProgress.hide()
+                        rvCategoryList.hide()
+                    }
+                }
+            }
         }
     }
 

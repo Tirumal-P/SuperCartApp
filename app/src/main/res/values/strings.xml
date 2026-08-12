@@ -29,4 +29,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_search_hint">Search for any Product</string>
     <string name="text_dummy_category_name">Smart Phones</string>
+    <string name="text_product_description">product description</string>
+    <string name="text_product_price">$1000</string>
+    <string name="text_product_add_to_cart">ADD TO CART</string>
+    <string name="text_product_cart_count">1</string>
+    <string name="text_product_name">Product Name</string>
+    <string name="text_specification">Specifications</string>
+    <string name="text_specs_label">Specs Label</string>
+    <string name="text_specs_description">Specs Description</string>
+    <string name="text_reviews_header">User Reviews</string>
+    <string name="text_review_title">Review Title</string>
+    <string name="text_review_description">Review Description</string>
 </resources>

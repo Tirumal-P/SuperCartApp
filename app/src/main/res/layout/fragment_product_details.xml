@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/card_view_padding"
+    tools:context=".view.productdetails.ProductDetailsFragment">
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/product_top_margin"
+        android:text="@string/text_product_name"
+        android:textColor="@color/content_primary"
+        android:textSize="@dimen/header3_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/custom_rating_bar"
+        layout="@layout/custom_rating_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_product_description"
+        android:text="@string/text_product_description"
+        android:textColor="@color/content_secondary"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vp_product_images"
+        android:layout_marginTop="@dimen/content_top_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_description" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tb_image_carousel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vp_product_images"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_product_price"
+        android:text="@string/text_product_price"
+        android:textColor="@color/content_primary"
+        android:textSize="@dimen/header3_size"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        app:layout_constraintTop_toBottomOf="@id/tb_image_carousel"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/acb_product_add_to_cart"
+        android:text="@string/text_product_add_to_cart"
+        android:textColor="@color/primary"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tb_image_carousel"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_quantity_selector"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tb_image_carousel"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_icon"
+            android:backgroundTint="@color/cart_quantity_background"
+            app:tint="@color/primary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_product_cart_count"
+            android:layout_margin="@dimen/cart_text_content_margin"
+            android:layout_gravity="center"
+            android:textSize="@dimen/header3_size" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/remove_icon"
+            app:tint="@color/primary"
+            android:backgroundTint="@color/cart_quantity_background"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_divider_height"
+        android:id="@+id/view_divider"
+        android:background="@color/content_tertiary"
+        android:layout_marginTop="@dimen/content_top_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_price"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_specifications_header"
+        android:text="@string/text_specification"
+        android:textSize="@dimen/header3_size"
+        android:textColor="@color/content_secondary"
+        android:layout_marginTop="@dimen/content_top_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_divider" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv_specifications_card"
+        android:layout_marginTop="@dimen/card_margin"
+        android:padding="@dimen/card_view_padding"
+        app:layout_constraintTop_toBottomOf="@id/tv_specifications_header">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_specifications_list"
+            tools:listitem="@layout/product_specification_item"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_reviews_header"
+        android:text="@string/text_reviews_header"
+        android:textSize="@dimen/header3_size"
+        android:textColor="@color/content_secondary"
+        android:layout_marginTop="@dimen/content_top_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_specifications_card" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_reviews_list"
+        tools:listitem="@layout/review_item"
+        app:layout_constraintTop_toBottomOf="@id/tv_reviews_header"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
