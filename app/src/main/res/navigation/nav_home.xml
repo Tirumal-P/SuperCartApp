@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/home_fragment"
+    android:id="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.supercartapp.view.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_fragment_to_product_list_fragment"
+            app:destination="@id/product_list_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/product_list_fragment"
+        android:name="com.example.supercartapp.view.product.ProductListFragment"
+        android:label="Product List"
+        tools:layout="@layout/fragment_product_list">
+        <argument
+            android:name="categoryId"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_product_list_fragment_to_product_details_fragment"
+            app:destination="@id/product_details_fragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/product_details_fragment"
+        android:name="com.example.supercartapp.view.productdetails.ProductDetailsFragment"
+        android:label="Product Details"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="productId"
+            app:argType="integer"/>
+    </fragment>
+
+</navigation>

@@ -8,7 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.ActivityMainBinding
-import com.example.supercartapp.view.product.ProductListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,9 +22,9 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         setUpSideNav()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_view, ProductListFragment())
-            .commit()
+//        supportFragmentManager.beginTransaction()
+//            .add(R.id.fragment_container_view, ProductDetailsFragment())
+//            .commit()
 
     }
 

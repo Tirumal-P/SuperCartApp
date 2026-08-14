@@ -7,7 +7,7 @@ import com.example.supercartapp.databinding.ItemCategoryBinding
 import com.example.supercartapp.model.response.CategoryItem
 import com.example.supercartapp.util.GenericDiffUtil
 
-class CategoryAdapter: ListAdapter<CategoryItem, CategoryItemViewHolder>(GenericDiffUtil{it.categoryId}){
+class CategoryAdapter(val onCategoryClick:(CategoryItem)->Unit): ListAdapter<CategoryItem, CategoryItemViewHolder>(GenericDiffUtil{it.categoryId}){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -20,6 +20,9 @@ class CategoryAdapter: ListAdapter<CategoryItem, CategoryItemViewHolder>(Generic
         holder: CategoryItemViewHolder,
         position: Int
     ) {
+        holder.binding.root.setOnClickListener {
+            onCategoryClick(getItem(position))
+        }
         holder.bind(getItem(position))
     }
 }

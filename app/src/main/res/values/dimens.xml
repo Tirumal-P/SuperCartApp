@@ -25,4 +25,8 @@
     <dimen name="card_margin">10dp</dimen>
     <dimen name="product_top_margin">4dp</dimen>
     <dimen name="rating_bar_margin">16dp</dimen>
+    <dimen name="product_image_height">400dp</dimen>
+    <dimen name="layout_padding">10dp</dimen>
+    <dimen name="tv_margin_bottom">8dp</dimen>
+    <dimen name="button_padding">12dp</dimen>
 </resources>

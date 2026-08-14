@@ -20,13 +20,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/custom_rating_bar"
-            layout="@layout/custom_rating_layout"
+        <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:id="@+id/rb_product_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductListBinding
 import com.example.supercartapp.model.remote.ApiClient
@@ -11,7 +12,7 @@ import com.example.supercartapp.model.response.SubcategoryItem
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
-import com.example.supercartapp.util.show
+import com.example.supercartapp.util.hideRest
 import com.example.supercartapp.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -22,10 +23,13 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list) {
         ProductListViewModel.ProductListViewModelFactory(repository)
     }
 
+    private val args: ProductListFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentProductListBinding.bind(view)
         setUpObservers()
-        productListViewModel.getSubCategories(1)
+        val categoryId = args.categoryId
+        productListViewModel.getSubCategories(categoryId)
     }
 
     private fun setUpObservers() {
@@ -33,12 +37,10 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list) {
             productListViewModel.subCategories.observe(viewLifecycleOwner) {
                 when (it) {
                     is UiState.Loading -> {
-                        pbProductListTab.show()
-                        tvProductListMessage.hide()
+                        pbProductListTab.hideRest(tvProductListMessage)
                     }
                     is UiState.Error ->{
-                        pbProductListTab.hide()
-                        tvProductListMessage.show()
+                        tvProductListMessage.hideRest(pbProductListTab)
                         tvProductListMessage.text = it.message
                     }
                     is UiState.Success ->{

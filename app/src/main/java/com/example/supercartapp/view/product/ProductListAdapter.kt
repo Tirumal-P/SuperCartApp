@@ -7,7 +7,7 @@ import com.example.supercartapp.databinding.ProductItemBinding
 import com.example.supercartapp.model.response.ProductItem
 import com.example.supercartapp.util.GenericDiffUtil
 
-class ProductListAdapter :
+class ProductListAdapter(val onProductClick:(ProductItem)-> Unit) :
     ListAdapter<ProductItem, ProductListViewHolder>(GenericDiffUtil<ProductItem>({ it.productId })) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,6 +21,7 @@ class ProductListAdapter :
         holder: ProductListViewHolder,
         position: Int
     ) {
+        holder.binding.root.setOnClickListener { onProductClick(getItem(position)) }
         holder.bind(getItem(position))
     }
 }

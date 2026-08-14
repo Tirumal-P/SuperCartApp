@@ -30,7 +30,7 @@
     <string name="text_search_hint">Search for any Product</string>
     <string name="text_dummy_category_name">Smart Phones</string>
     <string name="text_product_description">product description</string>
-    <string name="text_product_price">$1000</string>
+    <string name="text_product_price">$0</string>
     <string name="text_product_add_to_cart">ADD TO CART</string>
     <string name="text_product_cart_count">1</string>
     <string name="text_product_name">Product Name</string>
@@ -40,4 +40,10 @@
     <string name="text_reviews_header">User Reviews</string>
     <string name="text_review_title">Review Title</string>
     <string name="text_review_description">Review Description</string>
+    <string name="text_empty_reviews">No User Reviews Yet…</string>
+    <string name="text_empty_specification">Error in Fetching Specifications</string>
+    <string name="tv_cart_total">Total Bill Amount</string>
+    <string name="text_unit_price">Unit Price</string>
+    <string name="text_checkout">CHECKOUT</string>
+    <string name="text_cart_empty_message">Cart Message</string>
 </resources>

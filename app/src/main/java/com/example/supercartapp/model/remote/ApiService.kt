@@ -1,6 +1,7 @@
 package com.example.supercartapp.model.remote
 
 import com.example.supercartapp.model.response.CategoryResponse
+import com.example.supercartapp.model.response.ProductDetailsResponse
 import com.example.supercartapp.model.response.ProductResponse
 import com.example.supercartapp.model.response.SubCategoryResponse
 import retrofit2.http.GET
@@ -21,4 +22,9 @@ interface ApiService {
     suspend fun getProducts(
         @Path("sub_category_id") subCategoryId: Int
     ): ProductResponse
+
+    @GET("Product/details/{product_id}")
+    suspend fun getProductDetails(
+        @Path("product_id") productId: Int
+    ): ProductDetailsResponse
 }
