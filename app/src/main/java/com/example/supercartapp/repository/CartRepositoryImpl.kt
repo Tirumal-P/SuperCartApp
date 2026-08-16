@@ -1,5 +1,6 @@
 package com.example.supercartapp.repository
 
+import androidx.lifecycle.LiveData
 import com.example.supercartapp.model.local.dao.CartDao
 import com.example.supercartapp.model.local.entity.CartEntity
 import com.example.supercartapp.model.local.entity.CartItemEntity
@@ -30,7 +31,11 @@ class CartRepositoryImpl(val cartDao: CartDao): CartRepository {
         return cartDao.deleteCartItem(cartItemEntity)
     }
 
-    override suspend fun getCartWithCartItemsByUserId(userId: Long): CartWithCartItems? {
+    override fun getCartWithCartItemsByUserId(userId: Long): LiveData<CartWithCartItems?> {
         return cartDao.getCartWithCartItemsByUserId(userId)
+    }
+
+    override suspend fun getActiveCartById(userId: Long): Long? {
+        return cartDao.getActiveCartId(userId)
     }
 }

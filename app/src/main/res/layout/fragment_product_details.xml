@@ -79,7 +79,6 @@
                 android:text="@string/text_product_add_to_cart"
                 android:textColor="@color/primary"
                 android:background="@color/white"
-                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tb_image_carousel"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -89,25 +88,29 @@
                 android:id="@+id/product_quantity_selector"
                 android:background="@color/white"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tb_image_carousel"
                 app:layout_constraintEnd_toEndOf="parent">
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/add_icon"
+                    android:id="@+id/img_btn_decrease_product_quantity"
+                    android:src="@drawable/remove_icon"
                     android:backgroundTint="@color/cart_quantity_background"
                     app:tint="@color/primary"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_product_quantity"
                     android:text="@string/text_product_cart_count"
                     android:layout_margin="@dimen/cart_text_content_margin"
                     android:layout_gravity="center"
-                    android:textSize="@dimen/header3_size" />
+                    android:textSize="@dimen/text_size_head" />
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/remove_icon"
+                    android:id="@+id/img_btn_increase_product_quantity"
+                    android:src="@drawable/add_icon"
                     app:tint="@color/primary"
                     android:backgroundTint="@color/cart_quantity_background"/>
             </LinearLayout>

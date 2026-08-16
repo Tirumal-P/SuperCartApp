@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductListPageBinding
 import com.example.supercartapp.model.remote.ApiClient
-import com.example.supercartapp.model.response.ProductItem
+import com.example.supercartapp.model.remote.response.ProductItem
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide

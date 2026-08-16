@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.supercartapp.databinding.ProductReviewItemBinding
-import com.example.supercartapp.model.response.Review
+import com.example.supercartapp.model.remote.response.Review
 import com.example.supercartapp.util.GenericDiffUtil
 
 class ProductDetailsRatingAdapter: ListAdapter<Review, ProductDetailsRatingViewHolder>(

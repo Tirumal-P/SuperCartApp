@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_mobile_number"
             android:text="@string/text_mobile_number"
+            android:inputType="number"
             android:textColor="@color/content_secondary"
             android:layout_marginTop="@dimen/tv_et_top_margin"
             android:paddingBottom="@dimen/tv_et_bottom_padding"
@@ -42,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_height"
             android:id="@+id/et_mobile_number"
+            android:inputType="textPassword"
             android:padding="@dimen/et_padding"
             android:background="@drawable/edit_text_border"
             app:layout_constraintTop_toBottomOf="@id/tv_mobile_number"/>
@@ -79,14 +81,24 @@
             android:layout_height="@dimen/edit_text_height"
             android:id="@+id/et_password"
             android:padding="@dimen/et_padding"
-            android:drawableEnd="@drawable/hide_password_icon"
-            android:drawableTint="@color/content_primary"
             android:background="@drawable/edit_text_border"
             app:layout_constraintTop_toBottomOf="@id/tv_password"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_btn_toggle_password"
+            android:src="@drawable/hide_password_icon"
+            android:layout_marginEnd="@dimen/password_icon_margin"
+            android:background="@color/background_transparent"
+            app:tint="@color/content_primary"
+            app:layout_constraintTop_toTopOf="@id/et_password"
+            app:layout_constraintBottom_toBottomOf="@id/et_password"
+            app:layout_constraintEnd_toEndOf="@id/et_password"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/ac_btn_register"
             android:text="@string/text_register"
             android:textColor="@color/white"
             android:paddingStart="30dp"
@@ -98,13 +110,37 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_registration_message"
+            android:text="@string/text_registeration_message"
+            android:textSize="@dimen/header3_size"
+            android:textColor="@color/content_danger"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ac_btn_register"
+            app:layout_constraintBottom_toTopOf="@id/tv_existing_account"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_existing_account"
             android:text="@string/text_existing_account"
             android:textSize="@dimen/header4_size"
             android:textColor="@color/content_primary"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb_register_page"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

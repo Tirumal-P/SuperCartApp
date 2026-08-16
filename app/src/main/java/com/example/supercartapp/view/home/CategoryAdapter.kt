@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.supercartapp.databinding.ItemCategoryBinding
-import com.example.supercartapp.model.response.CategoryItem
+import com.example.supercartapp.model.remote.response.CategoryItem
 import com.example.supercartapp.util.GenericDiffUtil
 
 class CategoryAdapter(val onCategoryClick:(CategoryItem)->Unit): ListAdapter<CategoryItem, CategoryItemViewHolder>(GenericDiffUtil{it.categoryId}){

@@ -1,10 +1,16 @@
 package com.example.supercartapp.model.remote
 
-import com.example.supercartapp.model.response.CategoryResponse
-import com.example.supercartapp.model.response.ProductDetailsResponse
-import com.example.supercartapp.model.response.ProductResponse
-import com.example.supercartapp.model.response.SubCategoryResponse
+import com.example.supercartapp.model.remote.request.LoginRequest
+import com.example.supercartapp.model.remote.request.LoginResponse
+import com.example.supercartapp.model.remote.request.RegisterRequest
+import com.example.supercartapp.model.remote.request.RegisterResponse
+import com.example.supercartapp.model.remote.response.CategoryResponse
+import com.example.supercartapp.model.remote.response.ProductDetailsResponse
+import com.example.supercartapp.model.remote.response.ProductResponse
+import com.example.supercartapp.model.remote.response.SubCategoryResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -27,4 +33,14 @@ interface ApiService {
     suspend fun getProductDetails(
         @Path("product_id") productId: Int
     ): ProductDetailsResponse
+
+    @POST("User/auth")
+    suspend fun loginUser(
+        @Body loginRequest: LoginRequest
+    ): LoginResponse
+
+    @POST("User/register")
+    suspend fun registerUser(
+        @Body registerRequest: RegisterRequest
+    ): RegisterResponse
 }

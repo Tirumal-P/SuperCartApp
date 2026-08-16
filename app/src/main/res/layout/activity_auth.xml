@@ -7,35 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".view.auth.AuthActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gl_header"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".1"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/header"
+        android:id="@+id/tv_header"
         android:text="@string/login_text"
         android:textSize="@dimen/text_size_head"
         android:textColor="@color/white"
         android:padding="@dimen/header_padding"
         android:background="@color/primary"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/gl_header"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/auth_container"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_auth"
+        app:defaultNavHost="true"
+        app:layout_constraintTop_toBottomOf="@+id/tv_header"
+        app:layout_constraintBottom_toBottomOf="@id/gl_footer"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/gl_footer"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".98"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

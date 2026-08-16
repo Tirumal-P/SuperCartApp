@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductListBinding
 import com.example.supercartapp.model.remote.ApiClient
-import com.example.supercartapp.model.response.SubcategoryItem
+import com.example.supercartapp.model.remote.response.SubcategoryItem
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide

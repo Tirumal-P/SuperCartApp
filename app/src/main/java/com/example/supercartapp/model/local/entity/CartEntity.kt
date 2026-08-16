@@ -8,5 +8,6 @@ data class CartEntity(
 
     @PrimaryKey(true)
     val cartId: Long = 0,
-    val userId: Long
+    val userId: Long,
+    val isActive: Boolean = true
 )

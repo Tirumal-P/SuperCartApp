@@ -1,9 +1,11 @@
 package com.example.supercartapp.model.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.example.supercartapp.model.local.entity.CartEntity
 import com.example.supercartapp.model.local.entity.CartItemEntity
@@ -30,6 +32,10 @@ interface CartDao {
     @Delete
     suspend fun deleteCartItem(cartItemEntity: CartItemEntity): Int
 
-    @Query("SELECT * FROM Carts WHERE userId= :userId LIMIT 1")
-    suspend fun getCartWithCartItemsByUserId(userId: Long): CartWithCartItems?
+    @Transaction
+    @Query("""SELECT * FROM Carts WHERE userId= :userId AND isActive LIMIT 1""")
+    fun getCartWithCartItemsByUserId(userId: Long): LiveData<CartWithCartItems?>
+
+    @Query("SELECT cartId FROM Carts WHERE userId= :userId AND isActive LIMIT 1")
+    fun getActiveCartId(userId: Long): Long?
 }

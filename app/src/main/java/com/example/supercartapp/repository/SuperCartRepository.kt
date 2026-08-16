@@ -1,9 +1,9 @@
 package com.example.supercartapp.repository
 
-import com.example.supercartapp.model.response.CategoryResponse
-import com.example.supercartapp.model.response.ProductDetailsResponse
-import com.example.supercartapp.model.response.ProductResponse
-import com.example.supercartapp.model.response.SubCategoryResponse
+import com.example.supercartapp.model.remote.response.CategoryResponse
+import com.example.supercartapp.model.remote.response.ProductDetailsResponse
+import com.example.supercartapp.model.remote.response.ProductResponse
+import com.example.supercartapp.model.remote.response.SubCategoryResponse
 
 interface SuperCartRepository {
 

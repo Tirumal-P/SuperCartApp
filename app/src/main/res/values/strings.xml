@@ -46,4 +46,6 @@
     <string name="text_unit_price">Unit Price</string>
     <string name="text_checkout">CHECKOUT</string>
     <string name="text_cart_empty_message">Cart Message</string>
+    <string name="text_login_message">Login Message</string>
+    <string name="text_registeration_message">Registeration Message</string>
 </resources>

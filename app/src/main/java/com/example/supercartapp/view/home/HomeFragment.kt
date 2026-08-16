@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentHomeBinding
 import com.example.supercartapp.model.remote.ApiClient
-import com.example.supercartapp.model.response.CategoryItem
+import com.example.supercartapp.model.remote.response.CategoryItem
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hideRest

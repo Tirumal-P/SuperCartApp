@@ -1,60 +1,109 @@
 package com.example.supercartapp.view.auth
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.supercartapp.R
+import com.example.supercartapp.databinding.FragmentLoginBinding
+import com.example.supercartapp.model.remote.ApiClient
+import com.example.supercartapp.repository.AuthRepositoryImpl
+import com.example.supercartapp.util.UiState
+import com.example.supercartapp.util.hide
+import com.example.supercartapp.util.hideRest
+import com.example.supercartapp.util.validateEmail
+import com.example.supercartapp.util.validatePassword
+import com.example.supercartapp.view.MainActivity
+import com.example.supercartapp.viewmodel.AuthViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentLoginBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val authViewModel: AuthViewModel by viewModels {
+        val repository = AuthRepositoryImpl(ApiClient.apiService)
+        AuthViewModel.AuthViewModelFactory(repository)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentLoginBinding.bind(view)
+        setUpUiListeners()
+        setUpObserver()
+    }
+    private var showPassword = false
+
+    private fun setUpUiListeners() {
+        with(binding) {
+            acbtnLoginUser.setOnClickListener {
+                tvLoginMessage.text = ""
+                val emailId = etEmail.text.toString()
+                val password = etPassword.text.toString()
+                val loginMessage = StringBuilder()
+                if (!emailId.validateEmail()) {
+                    etEmail.requestFocus()
+                    loginMessage.append("Please Enter Valid Email.")
+                }
+                if (!password.validatePassword()) {
+                    etPassword.requestFocus()
+                    loginMessage.append(
+                        "\nPlease Enter Valid Password\n " +
+                                "Password must be at least 8 characters with at least 1 letter and 1 number."
+                    )
+                }
+                if (loginMessage.isNotEmpty()) {
+                    tvLoginMessage.text = loginMessage.toString()
+                    tvLoginMessage.hideRest()
+                } else {
+                    authViewModel.loginUser(email = emailId, password = password)
+                }
+            }
+            imgBtnTogglePassword.setOnClickListener {
+                showPassword = !showPassword
+                if (showPassword) {
+                    imgBtnTogglePassword.setImageResource(R.drawable.show_password_icon)
+                    etPassword.transformationMethod = null
+                } else {
+                    imgBtnTogglePassword.setImageResource(R.drawable.hide_password_icon)
+                    etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                }
+                etPassword.setSelection(etPassword.text.toString().length)
+            }
+
+            tvNewUser.setOnClickListener {
+                findNavController().navigate(R.id.action_login_fragment_to_register_fragment)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setUpObserver(){
+        with(binding){
+            authViewModel.loginState.observe(viewLifecycleOwner){state->
+                when(state){
+                    is UiState.Loading -> {
+                        pbLoginPage.hideRest(tvLoginMessage)
+                    }
+                    is UiState.Error -> {
+                        tvLoginMessage.text = state.message
+                        tvLoginMessage.hideRest(pbLoginPage)
+                    }
+                    is UiState.Success ->{
+                        pbLoginPage.hide()
+                        tvLoginMessage.hide()
+//                        findNavController().navigate(R.id.nav_main){
+//                            popUpTo(R.id.nav_auth){
+//                                inclusive = true
+//                            }
+//                        }
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finish()
+                    }
                 }
             }
+        }
     }
+
 }

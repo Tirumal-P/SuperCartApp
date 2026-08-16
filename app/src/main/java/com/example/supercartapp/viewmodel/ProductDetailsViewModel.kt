@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.supercartapp.model.response.Product
+import com.example.supercartapp.model.remote.response.Product
 import com.example.supercartapp.repository.SuperCartRepository
 import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers

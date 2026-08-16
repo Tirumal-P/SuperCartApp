@@ -1,4 +1,4 @@
-package com.example.supercartapp.model.response
+package com.example.supercartapp.model.remote.response
 
 import com.google.gson.annotations.SerializedName
 

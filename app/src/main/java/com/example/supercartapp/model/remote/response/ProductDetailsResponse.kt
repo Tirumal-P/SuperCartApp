@@ -1,12 +1,13 @@
-package com.example.supercartapp.model.response
+package com.example.supercartapp.model.remote.response
+
 
 import com.google.gson.annotations.SerializedName
 
-data class CategoryResponse (
+data class ProductDetailsResponse(
     @SerializedName("status")
     val status: Int,
     @SerializedName("message")
     val message: String,
-    @SerializedName("categories")
-    val categories: List<CategoryItem>
+    @SerializedName("product")
+    val product: Product
 )

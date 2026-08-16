@@ -8,12 +8,16 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductDetailsBinding
+import com.example.supercartapp.model.local.SuperCartDatabase
+import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.model.remote.ApiClient
-import com.example.supercartapp.model.response.Image
-import com.example.supercartapp.model.response.Product
+import com.example.supercartapp.model.remote.response.Image
+import com.example.supercartapp.model.remote.response.Product
+import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.repository.SuperCartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hideRest
+import com.example.supercartapp.viewmodel.CartViewModel
 import com.example.supercartapp.viewmodel.ProductDetailsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,19 +28,50 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         ProductDetailsViewModel.ProductDetailsViewModelFactory(repository)
     }
 
+    private val cartViewModel: CartViewModel by viewModels {
+        val repository = CartRepositoryImpl(SuperCartDatabase.getDatabase(requireContext()).cartDao())
+        CartViewModel.CartViewModelFactory(repository)
+    }
+
     private lateinit var productDetailsRatingAdapter: ProductDetailsRatingAdapter
 
     private lateinit var productDetailsSpecificationAdapter: ProductDetailsSpecificationAdapter
 
     private val args: ProductDetailsFragmentArgs by navArgs()
 
+    private var currentCartItem: CartItemEntity? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProductDetailsBinding.bind(view)
         setUpObserver()
         setUpRecyclerViews()
+        setUpEventHandling()
         val productId = args.productId
         productDetailsViewModel.getProductDetails(productId)
+    }
+
+    private fun setUpEventHandling() {
+        with(binding){
+            acbProductAddToCart.setOnClickListener {
+                val state = productDetailsViewModel.productDetails.value
+                if(state is UiState.Success){
+                    cartViewModel.addToCart(state.data)
+                }
+            }
+
+            imgBtnDecreaseProductQuantity.setOnClickListener {
+                currentCartItem?.let {
+                    cartViewModel.cartItemDecreaseQuantity(it)
+                }
+            }
+
+            imgBtnIncreaseProductQuantity.setOnClickListener {
+                currentCartItem?.let {
+                    cartViewModel.cartItemIncreaseQuantity(it)
+                }
+            }
+        }
     }
 
     private fun setUpRecyclerViews() {
@@ -66,6 +101,25 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
                     is UiState.Error -> {
                         tvProductDetailsMessage.text = it.message
                         tvProductDetailsMessage.hideRest(pbProductDetailsProgress, clProductDetails)
+                    }
+                }
+            }
+
+            cartViewModel.cartWithItems.observe(viewLifecycleOwner){cartWithCartItems ->
+                with(binding){
+                    if (cartWithCartItems == null) {
+                        acbProductAddToCart.hideRest(productQuantitySelector)
+                        return@observe
+                    }
+                    val cartItem = cartWithCartItems.cartItems.find {
+                        it.productId == args.productId.toLong()
+                    }
+                    currentCartItem = cartItem
+                    if(cartItem !=null && cartItem.productQuantity >0) {
+                        tvProductQuantity.text = cartItem.productQuantity.toString()
+                        productQuantitySelector.hideRest(acbProductAddToCart)
+                    }else{
+                        acbProductAddToCart.hideRest(productQuantitySelector)
                     }
                 }
             }

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.supercartapp.databinding.ProductItemBinding
-import com.example.supercartapp.model.response.ProductItem
+import com.example.supercartapp.model.remote.response.ProductItem
 import com.example.supercartapp.util.GenericDiffUtil
 
 class ProductListAdapter(val onProductClick:(ProductItem)-> Unit) :

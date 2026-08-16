@@ -9,8 +9,6 @@ import com.example.supercartapp.databinding.FragmentCartBinding
 import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.local.relation.CartWithCartItems
 import com.example.supercartapp.repository.CartRepositoryImpl
-import com.example.supercartapp.util.UiState
-import com.example.supercartapp.util.hideRest
 import com.example.supercartapp.viewmodel.CartViewModel
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
@@ -30,21 +28,21 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private fun setUpObservers() {
         with(binding){
-            cartViewModel.cartState.observe(viewLifecycleOwner){
-                when(it){
-                    is UiState.Loading -> pbCartProgress.hideRest(rvCartItemList,tvCartMessage)
-
-                    is UiState.Success -> {
-                        setContent(it.data)
-                        rvCartItemList.hideRest(tvCartMessage,pbCartProgress)
-                    }
-
-                    is UiState.Error -> {
-                        tvCartMessage.text = it.message
-                        tvCartMessage.hideRest(rvCartItemList,pbCartProgress)
-                    }
-                }
-            }
+//            cartViewModel.cartState.observe(viewLifecycleOwner){
+//                when(it){
+//                    is UiState.Loading -> pbCartProgress.hideRest(rvCartItemList,tvCartMessage)
+//
+//                    is UiState.Success -> {
+//                        setContent(it.data)
+//                        rvCartItemList.hideRest(tvCartMessage,pbCartProgress)
+//                    }
+//
+//                    is UiState.Error -> {
+//                        tvCartMessage.text = it.message
+//                        tvCartMessage.hideRest(rvCartItemList,pbCartProgress)
+//                    }
+//                }
+//            }
         }
     }
 

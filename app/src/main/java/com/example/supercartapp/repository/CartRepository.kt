@@ -1,4 +1,5 @@
 package com.example.supercartapp.repository
+import androidx.lifecycle.LiveData
 import com.example.supercartapp.model.local.entity.CartEntity
 import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.model.local.relation.CartWithCartItems
@@ -17,5 +18,7 @@ interface CartRepository {
 
     suspend fun deleteCartItem(cartItemEntity: CartItemEntity): Int
 
-    suspend fun getCartWithCartItemsByUserId(userId: Long): CartWithCartItems?
+    fun getCartWithCartItemsByUserId(userId: Long): LiveData<CartWithCartItems?>
+
+    suspend fun getActiveCartById(userId: Long): Long?
 }

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -33,6 +34,11 @@ android {
     buildFeatures{
         viewBinding = true
     }
+}
+
+room {
+    schemaDirectory(project.layout.projectDirectory.dir("schemas"))
+    generateKotlin = true
 }
 
 kotlin {
