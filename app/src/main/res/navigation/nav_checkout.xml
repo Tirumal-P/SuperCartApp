@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/orderSummaryFragment"
-        android:name="com.example.supercartapp.view.checkout.ordersummary.OrderSummaryFragment"
+        android:name="com.example.supercartapp.view.checkout.order.OrderSummaryFragment"
         android:label="Summary"
         tools:layout="@layout/fragment_order_summary"/>
 

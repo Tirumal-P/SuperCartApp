@@ -16,7 +16,7 @@ class CartViewHolder(
             ImageGlide.glide(imgvProductImage, cartItem.productImageURl)
             tvProductName.text = cartItem.productName
             tvProductDescription.text = cartItem.productDescription
-            tvProductUnitPriceText.text = cartItem.productPrice.toString()
+            tvProductPrice.text = cartItem.productPrice.toString()
             tvTotalItemPrice.text = (cartItem.productPrice * cartItem.productQuantity).toString()
             tvProductQuantity.text = cartItem.productQuantity.toString()
             imgBtnIncreaseQuantity.setOnClickListener {

@@ -6,6 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/layout_padding"
     tools:context=".view.checkout.finalcart.FinalCartFragment">
+    <include
+        android:id="@+id/header"
+        layout="@layout/checkout_step_header"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,8 +16,9 @@
         android:id="@+id/tv_total_head"
         android:text="@string/text_total_bill_amount"
         android:textSize="@dimen/header3_size"
+        android:layout_marginTop="@dimen/content_top_margin"
         android:textColor="@color/content_secondary"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -23,9 +27,10 @@
         android:id="@+id/tv_total"
         android:text="@string/text_product_price"
         android:textSize="@dimen/header3_size"
+        android:layout_marginTop="@dimen/content_top_margin"
         android:textColor="@color/content_primary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -40,6 +45,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/acbtn_chechkout"
         android:text="@string/text_checkout"
         android:background="@drawable/button_style"
         android:textColor="@color/white"

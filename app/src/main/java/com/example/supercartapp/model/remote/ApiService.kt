@@ -2,12 +2,14 @@ package com.example.supercartapp.model.remote
 
 import com.example.supercartapp.model.remote.request.AddAddressRequest
 import com.example.supercartapp.model.remote.request.LoginRequest
+import com.example.supercartapp.model.remote.request.PlaceOrderRequest
 import com.example.supercartapp.model.remote.response.LoginResponse
 import com.example.supercartapp.model.remote.request.RegisterRequest
 import com.example.supercartapp.model.remote.response.AddAddressResponse
 import com.example.supercartapp.model.remote.response.RegisterResponse
 import com.example.supercartapp.model.remote.response.CategoryResponse
 import com.example.supercartapp.model.remote.response.AddressResponse
+import com.example.supercartapp.model.remote.response.PlaceOrderResponse
 import com.example.supercartapp.model.remote.response.ProductDetailsResponse
 import com.example.supercartapp.model.remote.response.ProductResponse
 import com.example.supercartapp.model.remote.response.SubCategoryResponse
@@ -54,6 +56,11 @@ interface ApiService {
 
     @POST("User/address")
     suspend fun addUserAddress(
-        addAddressRequest: AddAddressRequest
+        @Body addAddressRequest: AddAddressRequest
     ): AddAddressResponse
+
+    @POST("Order")
+    suspend fun placeOrder(
+        @Body orderRequest: PlaceOrderRequest
+    ): PlaceOrderResponse
 }

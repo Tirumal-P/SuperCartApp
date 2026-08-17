@@ -3,8 +3,11 @@ package com.example.supercartapp.view.checkout.finalcart
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentFinalCartBinding
 import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.local.entity.CartItemEntity
@@ -12,7 +15,7 @@ import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.util.hideRest
 import com.example.supercartapp.viewmodel.CartViewModel
 
-class FinalCartFragment : Fragment() {
+class FinalCartFragment : Fragment(R.layout.fragment_final_cart) {
 
     private lateinit var binding: FragmentFinalCartBinding
 
@@ -27,6 +30,14 @@ class FinalCartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFinalCartBinding.bind(view)
         setUpView()
+        setUpObservers()
+        setUpListener()
+    }
+
+    private fun setUpListener() {
+        binding.acbtnChechkout.setOnClickListener {
+            findNavController().navigate(R.id.action_finalCartFragment_to_deliveryAddressFragment)
+        }
     }
 
     private fun setUpView() {
@@ -35,6 +46,7 @@ class FinalCartFragment : Fragment() {
             adapter = finalCartAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        binding.header.tvCartStep.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))
     }
 
     private fun setUpObservers() {

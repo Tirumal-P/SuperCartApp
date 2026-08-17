@@ -54,7 +54,6 @@
     <string name="text_add_address">ADD ADDRESS</string>
     <string name="text_next">NEXT</string>
     <string name="text_no_delivery_address">No delivery address found</string>
-    <string name="text_address">Address Text</string>
     <string name="text_select_payment_option">Select Payment Option</string>
     <string name="text_cash_on_delivery">Cash On Delivery</string>
     <string name="text_internet_banking">Internet Banking</string>
@@ -72,4 +71,11 @@
     <string name="text_save">SAVE</string>
     <string name="text_enter_address_title">Please enter address title</string>
     <string name="text_enter_address">Please enter address</string>
+    <string name="text_delivery">Delivery</string>
+    <string name="text_payment">Payment</string>
+    <string name="text_summary">Summary</string>
+    <string name="text_order_id_label">Order Id</string>
+    <string name="text_order_status_label">Order Status</string>
+    <string name="text_order_id_value">#0</string>
+    <string name="text_order_status_value">placed</string>
 </resources>

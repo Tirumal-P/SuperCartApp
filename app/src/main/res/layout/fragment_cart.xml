@@ -23,6 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_cart_total"
             android:text="@string/text_product_price"
             android:textSize="@dimen/header3_size"
             android:textColor="@color/content_primary"
@@ -42,6 +43,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/acbtn_chechkout"
             android:text="@string/text_checkout"
             android:background="@drawable/button_style"
             android:textColor="@color/white"

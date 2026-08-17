@@ -3,22 +3,28 @@ package com.example.supercartapp.view.checkout.payment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentPaymentBinding
 import com.example.supercartapp.model.local.model.PaymentType
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.repository.DeliveryRepositoryImpl
+import com.example.supercartapp.repository.OrderRepositoryImpl
 import com.example.supercartapp.viewmodel.CheckoutViewModel
+import kotlin.getValue
 
 class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
     private lateinit var binding: FragmentPaymentBinding
 
-    private val checkoutViewModel: CheckoutViewModel by viewModels {
-        val repository = DeliveryRepositoryImpl(ApiClient.apiService)
-        CheckoutViewModel.CheckoutViewModelFactory(repository)
+    private val checkoutViewModel: CheckoutViewModel by navGraphViewModels(R.id.nav_checkout) {
+        val deliveryRepository = DeliveryRepositoryImpl(ApiClient.apiService)
+        val orderRepository = OrderRepositoryImpl(ApiClient.apiService)
+        CheckoutViewModel.CheckoutViewModelFactory(deliveryRepository, orderRepository)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +32,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
         binding = FragmentPaymentBinding.bind(view)
         setUpEventHandling()
         setUpObservers()
+        binding.header.tvPaymentStep.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))
     }
 
     private fun setUpEventHandling() {
@@ -51,8 +58,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
                     Toast.makeText(requireContext(),"Please select a payment method",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-
-                // navigate to summary
+                findNavController().navigate(R.id.action_paymentFragment_to_orderSummaryFragment)
             }
         }
     }

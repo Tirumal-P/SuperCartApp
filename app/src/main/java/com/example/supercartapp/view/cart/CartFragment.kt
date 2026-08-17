@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentCartBinding
@@ -30,6 +31,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         binding = FragmentCartBinding.bind(view)
         setUpCartItemList()
         setUpObservers()
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+        binding.acbtnChechkout.setOnClickListener {
+            findNavController().navigate(R.id.action_cartFragment_to_nav_checkout)
+        }
     }
 
     private fun setUpCartItemList() {
@@ -77,7 +85,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         cartItems.forEach {
             totalAmount += (it.productPrice * it.productQuantity)
         }
-        binding.tvCartTotalText.text = "$$totalAmount"
+        binding.tvCartTotal.text = "$$totalAmount"
     }
 
     private fun onIncreaseQuantity(cartItem: CartItemEntity) {

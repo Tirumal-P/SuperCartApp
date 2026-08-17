@@ -4,21 +4,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/layout_padding"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.checkout.order.OrderSummaryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include
-        android:id="@+id/header"
-        layout="@layout/checkout_step_header"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_order_id_label"
+        android:text="@string/text_order_id_label"
+        android:textSize="@dimen/text_size_head"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_order_id"
+        android:text="@string/text_order_id_value"
+        android:textSize="@dimen/text_size_head"
+        android:textColor="@color/content_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_order_status_label"
+        android:text="@string/text_order_status_label"
+        android:textSize="@dimen/header4_size"
+        android:textColor="@color/content_tertiary"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_id_label"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_order_status"
+        android:text="@string/text_order_status_value"
+        android:textSize="@dimen/header4_size"
+        android:textColor="@color/content_primary"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_id_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_cart_items_head"
         android:textColor="@color/content_tertiary"
-        android:text="@string/text_cart_items"
+        android:text="Purchase Items"
         android:textSize="@dimen/header3_size"
         android:layout_marginTop="@dimen/content_top_margin"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintTop_toBottomOf="@id/tv_order_status_label"
         app:layout_constraintStart_toStartOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -118,17 +154,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_delivery_address"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_confirm_order"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/text_confirm_order"
-        android:textColor="@color/white"
-        android:textSize="@dimen/header3_size"
-        android:padding="@dimen/button_padding"
-        android:background="@drawable/button_style"
-        android:layout_margin="@dimen/content_top_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_payment_option_label" />
 </androidx.constraintlayout.widget.ConstraintLayout>

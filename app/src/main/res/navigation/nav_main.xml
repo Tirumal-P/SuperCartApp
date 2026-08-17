@@ -35,4 +35,16 @@
             app:argType="integer"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.supercartapp.view.cart.CartFragment"
+        tools:layout="@layout/fragment_cart"
+        android:label="Cart">
+        <action
+            android:id="@+id/action_cartFragment_to_nav_checkout"
+            app:destination="@id/nav_checkout" />
+    </fragment>
+
+    <include app:graph="@navigation/nav_checkout"/>
+
 </navigation>
