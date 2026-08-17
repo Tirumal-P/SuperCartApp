@@ -10,6 +10,7 @@ import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductDetailsBinding
 import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.local.entity.CartItemEntity
+import com.example.supercartapp.model.local.model.CartProduct
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.model.remote.response.Image
 import com.example.supercartapp.model.remote.response.Product
@@ -56,7 +57,15 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
             acbProductAddToCart.setOnClickListener {
                 val state = productDetailsViewModel.productDetails.value
                 if(state is UiState.Success){
-                    cartViewModel.addToCart(state.data)
+                    val product = state.data
+                    val cartProduct = CartProduct(
+                        productId = product.productId.toLong(),
+                        productName = product.productName,
+                        description = product.description,
+                        price = product.price.toInt(),
+                        imageUrl = product.images[0].image
+                    )
+                    cartViewModel.addToCart(cartProduct)
                 }
             }
 
@@ -131,7 +140,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
             tvProductName.text = product.productName
             rbProductRating.rating = product.averageRating.toFloat()
             tvProductDescription.text = product.description
-            tvProductPrice.text = product.price
+            tvProductPrice.text = "\$${product.price}"
             if(product.specifications.isEmpty()) {
                 tvEmptySpecification.hideRest(rvSpecificationsList)
             }

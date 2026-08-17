@@ -69,9 +69,9 @@
                 android:text="@string/text_product_price"
                 android:textSize="@dimen/header4_size"
                 android:textColor="@color/content_primary"
+                android:layout_marginBottom="@dimen/tv_margin_bottom"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/acb_product_add_to_cart"
-                app:layout_constraintBottom_toBottomOf="@id/acb_product_add_to_cart"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/acb_product_quantity_selector"
+                android:id="@+id/ll_product_quantity_selector"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:visibility="gone"
@@ -94,12 +94,14 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/add_icon"
+                    android:id="@+id/img_btn_decrease_quantity"
+                    android:src="@drawable/remove_icon"
                     android:backgroundTint="@color/cart_quantity_background"
                     app:tint="@color/primary"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_quantity"
                     android:text="@string/text_product_cart_count"
                     android:layout_margin="@dimen/cart_text_content_margin"
                     android:layout_gravity="center"
@@ -107,7 +109,8 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/remove_icon"
+                    android:id="@+id/img_btn_increase_quantity"
+                    android:src="@drawable/add_icon"
                     app:tint="@color/primary"
                     android:backgroundTint="@color/cart_quantity_background"/>
             </LinearLayout>

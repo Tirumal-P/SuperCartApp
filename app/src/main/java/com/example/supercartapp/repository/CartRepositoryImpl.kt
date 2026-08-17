@@ -38,4 +38,12 @@ class CartRepositoryImpl(val cartDao: CartDao): CartRepository {
     override suspend fun getActiveCartById(userId: Long): Long? {
         return cartDao.getActiveCartId(userId)
     }
+
+    override suspend fun ensureActiveCart(userId: Long) {
+        val activeCart = cartDao.getActiveCartId(userId)
+        if(activeCart == null){
+            cartDao.insertCart(CartEntity(userId= userId))
+        }
+    }
+
 }

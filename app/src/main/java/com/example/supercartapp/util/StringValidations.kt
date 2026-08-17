@@ -11,11 +11,11 @@ fun String.validatePassword(): Boolean{
 }
 
 fun String.validateFullName(): Boolean{
-    val fullNameRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+    val fullNameRegex = "^[A-Za-z]+(?: [A-Za-z]+)+$".toRegex()
     return this.matches(fullNameRegex)
 }
 
 fun String.validatePhoneNumber(): Boolean{
-    val phoneNumberRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
+    val phoneNumberRegex = "^[0-9]{10}$".toRegex()
     return this.matches(phoneNumberRegex)
 }

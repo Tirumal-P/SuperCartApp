@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/layout_padding">
+
+    <TextView
+        android:id="@+id/tv_add_address_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_add_new_address"
+        android:textSize="@dimen/text_size_head"
+        android:textColor="@color/content_secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_address_title_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_top_margin"
+        android:text="@string/text_address_title"
+        android:textSize="@dimen/header4_size"
+        android:textColor="@color/content_tertiary"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_address_head"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_address_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        android:background="@drawable/edit_text_border"
+        android:padding="@dimen/layout_padding"
+        app:layout_constraintTop_toBottomOf="@id/tv_address_title_head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_address_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_top_margin"
+        android:text="@string/text_address"
+        android:textSize="@dimen/header4_size"
+        android:textColor="@color/content_tertiary"
+        app:layout_constraintTop_toBottomOf="@id/et_address_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_address"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/et_address_height"
+        android:layout_marginTop="@dimen/tv_tv_top_margin"
+        android:background="@drawable/edit_text_border"
+        android:gravity="top"
+        android:padding="@dimen/layout_padding"
+        android:inputType="textMultiLine"
+        app:layout_constraintTop_toBottomOf="@id/tv_address_head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_top_margin"
+        android:layout_marginEnd="@dimen/content_top_margin"
+        android:text="@string/text_cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/header3_size"
+        android:background="@drawable/button_style"
+        app:layout_constraintTop_toBottomOf="@id/et_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_save"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/header3_size"
+        android:background="@drawable/button_style"
+        app:layout_constraintTop_toTopOf="@id/btn_cancel"
+        app:layout_constraintBottom_toBottomOf="@id/btn_cancel"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

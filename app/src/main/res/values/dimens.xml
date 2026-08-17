@@ -9,7 +9,6 @@
     <dimen name="edit_text_height">52dp</dimen>
     <dimen name="content_top_margin">16dp</dimen>
     <dimen name="header4_size">16sp</dimen>
-    <dimen name="bottom_bar_size">80dp</dimen>
     <dimen name="side_nav_size">280dp</dimen>
     <dimen name="tv_tv_top_margin">8dp</dimen>
     <dimen name="view_divider_height">1dp</dimen>
@@ -30,4 +29,6 @@
     <dimen name="tv_margin_bottom">8dp</dimen>
     <dimen name="button_padding">12dp</dimen>
     <dimen name="password_icon_margin">12dp</dimen>
+    <dimen name="payment_item_height">80dp</dimen>
+    <dimen name="et_address_height">120dp</dimen>
 </resources>

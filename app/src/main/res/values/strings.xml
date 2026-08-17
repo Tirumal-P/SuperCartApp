@@ -25,8 +25,6 @@
     <string name="text_welcome">Welcome User</string>
     <string name="text_user_email">User Email Id</string>
     <string name="text_user_phone">User Phone No.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_search_hint">Search for any Product</string>
     <string name="text_dummy_category_name">Smart Phones</string>
     <string name="text_product_description">product description</string>
@@ -48,4 +46,30 @@
     <string name="text_cart_empty_message">Cart Message</string>
     <string name="text_login_message">Login Message</string>
     <string name="text_registeration_message">Registeration Message</string>
+    <string name="text_total_bill_amount">Total Bill Amount</string>
+    <string name="text_quantity_label">Quantity</string>
+    <string name="text_quantity">0</string>
+    <string name="text_amount_label">Amount</string>
+    <string name="text_select_delivery_address">Select Delivery Address</string>
+    <string name="text_add_address">ADD ADDRESS</string>
+    <string name="text_next">NEXT</string>
+    <string name="text_no_delivery_address">No delivery address found</string>
+    <string name="text_address">Address Text</string>
+    <string name="text_select_payment_option">Select Payment Option</string>
+    <string name="text_cash_on_delivery">Cash On Delivery</string>
+    <string name="text_internet_banking">Internet Banking</string>
+    <string name="text_debit_credit_card">Debit Card / Credit Card</string>
+    <string name="text_paypal">Pay Pal</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_cart_items">Cart Items</string>
+    <string name="text_delivery_address">Delivery Address</string>
+    <string name="text_payment_option_label">Payment Option</string>
+    <string name="text_confirm_order"><![CDATA[CONFIRM & PLACE ORDER]]></string>
+    <string name="text_add_new_address">Add New Address</string>
+    <string name="text_address_title">Address Title</string>
+    <string name="text_address">Address</string>
+    <string name="text_cancel">CANCEL</string>
+    <string name="text_save">SAVE</string>
+    <string name="text_enter_address_title">Please enter address title</string>
+    <string name="text_enter_address">Please enter address</string>
 </resources>

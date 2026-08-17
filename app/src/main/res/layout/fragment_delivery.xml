@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layout_padding"
+    tools:context=".view.checkout.delivery.DeliveryAddressFragment">
+
+    <TextView
+        android:id="@+id/tv_delivery_address_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_select_delivery_address"
+        android:textSize="@dimen/header3_size"
+        android:textColor="@color/content_secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_address_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/content_top_margin"
+        android:layout_marginBottom="@dimen/content_top_margin"
+        tools:listitem="@layout/delivery_item"
+        tools:itemCount="2"
+        app:layout_constraintTop_toBottomOf="@id/tv_delivery_address_head"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/content_top_margin"
+        android:text="@string/text_add_address"
+        android:textColor="@color/white"
+        android:textSize="@dimen/header3_size"
+        android:padding="@dimen/button_padding"
+        android:background="@drawable/button_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_delivery_next"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_delivery_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/header3_size"
+        android:padding="@dimen/button_padding"
+        android:background="@drawable/button_style"
+        app:layout_constraintStart_toEndOf="@id/btn_add_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_delivery_address_message"
+        android:visibility="gone"
+        android:text="@string/text_no_delivery_address"
+        android:textSize="@dimen/header4_size"
+        android:textColor="@color/content_secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb_delivery_address_progress"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

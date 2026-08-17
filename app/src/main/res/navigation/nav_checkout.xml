@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_checkout"
+    app:startDestination="@id/finalCartFragment">
+
+    <fragment
+        android:id="@+id/finalCartFragment"
+        android:name="com.example.supercartapp.view.checkout.finalcart.FinalCartFragment"
+        android:label="Cart Items"
+        tools:layout="@layout/fragment_final_cart">
+        <action
+            android:id="@+id/action_finalCartFragment_to_deliveryAddressFragment"
+            app:destination="@id/deliveryAddressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/deliveryAddressFragment"
+        android:name="com.example.supercartapp.view.checkout.delivery.DeliveryAddressFragment"
+        android:label="Delivery"
+        tools:layout="@layout/fragment_delivery">
+        <action
+            android:id="@+id/action_deliveryAddressFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.supercartapp.view.checkout.payment.PaymentFragment"
+        android:label="Payment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_paymentFragment_to_orderSummaryFragment"
+            app:destination="@id/orderSummaryFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderSummaryFragment"
+        android:name="com.example.supercartapp.view.checkout.ordersummary.OrderSummaryFragment"
+        android:label="Summary"
+        tools:layout="@layout/fragment_order_summary"/>
+
+</navigation>

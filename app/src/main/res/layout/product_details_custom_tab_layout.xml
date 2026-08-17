@@ -10,6 +10,7 @@
         android:src="@drawable/circle_icon"
         android:layout_marginVertical="@dimen/content_top_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/image_tab_icon_selector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

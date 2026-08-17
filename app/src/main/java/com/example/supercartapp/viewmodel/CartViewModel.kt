@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.supercartapp.model.local.entity.CartEntity
 import com.example.supercartapp.model.local.entity.CartItemEntity
-import com.example.supercartapp.model.remote.response.Product
+import com.example.supercartapp.model.local.model.CartProduct
+import com.example.supercartapp.model.local.preferences.LoginPreferences
 import com.example.supercartapp.repository.CartRepository
 import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers
@@ -15,10 +16,14 @@ import kotlinx.coroutines.launch
 
 class CartViewModel(val repository: CartRepository): ViewModel() {
 
-    val cartWithItems = repository.getCartWithCartItemsByUserId(1)
     private val _cartState = MutableLiveData<UiState<Long>>()
     val cartState: LiveData<UiState<Long>>
         get() = _cartState
+
+    private val userId: Long =
+        LoginPreferences.getUserId().toLong()
+
+    val cartWithItems = repository.getCartWithCartItemsByUserId(userId)
 
     fun insertCartItem(cartItem: CartItemEntity){
         viewModelScope.launch(Dispatchers.IO) {
@@ -113,7 +118,7 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
     fun cartItemDecreaseQuantity(cartItem: CartItemEntity){
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                var response = if(cartItem.productQuantity>1){
+                val response = if(cartItem.productQuantity>1){
                     val updatedCartItem = cartItem.copy(
                         productQuantity = cartItem.productQuantity-1
                     )
@@ -143,26 +148,25 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
 //        }
 //    }
 
-    fun addToCart(productDetails: Product){
-        viewModelScope.launch {
+    fun addToCart(cartProduct: CartProduct){
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val cartId: Long = repository.getActiveCartById(1L)?: return@launch
+                val userId = LoginPreferences.getUserId()
+                val cartId: Long = repository.getActiveCartById(userId.toLong())?: return@launch
                 val cartItem = CartItemEntity(
-                    productId = productDetails.productId.toLong(),
-                    productName = productDetails.productName,
-                    productDescription = productDetails.description,
-                    productPrice = productDetails.price.toInt(),
+                    productId = cartProduct.productId,
+                    productName = cartProduct.productName,
+                    productDescription = cartProduct.description,
+                    productPrice = cartProduct.price,
                     productQuantity = 1,
-                    productImageURl = productDetails.images[0].image,
+                    productImageURl = cartProduct.imageUrl,
                     cartId = cartId
                 )
                 repository.insertCartItem(cartItemEntity = cartItem)
             }catch (e: Exception){
                 e.printStackTrace()
             }
-
         }
-
     }
 
 //    fun getCart(){
@@ -186,7 +190,7 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
             if(modelClass.isAssignableFrom(CartViewModel::class.java)){
                 return CartViewModel(repository) as T
             }
-            throw IllegalArgumentException("Unknown ViewModel for type HomeViewModel")
+            throw IllegalArgumentException("Unknown ViewModel for type CartViewModel")
         }
     }
 }

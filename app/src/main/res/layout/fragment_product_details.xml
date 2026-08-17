@@ -12,9 +12,9 @@
         android:padding="@dimen/card_view_padding">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_product_details"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/cl_product_details">
             <TextView
                 android:id="@+id/tv_product_name"
                 android:layout_width="wrap_content"
@@ -150,11 +150,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tv_empty_specification"
                 android:visibility="gone"
                 android:text="@string/text_empty_specification"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/tv_tv_top_margin"
-                android:id="@+id/tv_empty_specification"
                 app:layout_constraintTop_toBottomOf="@id/tv_specifications_header"/>
 
             <TextView
@@ -188,8 +188,8 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:id="@+id/pb_product_details_progress"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -198,16 +198,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_product_details_message"
             android:visibility="gone"
             android:gravity="center"
-            android:id="@+id/tv_product_details_message"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

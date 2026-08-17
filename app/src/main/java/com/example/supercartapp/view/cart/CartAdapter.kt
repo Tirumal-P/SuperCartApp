@@ -7,13 +7,19 @@ import com.example.supercartapp.databinding.CartItemBinding
 import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.util.GenericDiffUtil
 
-class CartAdapter: ListAdapter<CartItemEntity, CartViewHolder>(GenericDiffUtil({it.cartId})) {
+class CartAdapter(
+    val onIncreaseQuantity: (CartItemEntity) -> Unit,
+    val onDecreaseQuantity: (CartItemEntity) -> Unit
+) : ListAdapter<CartItemEntity, CartViewHolder>(GenericDiffUtil({ it.cartId })) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CartViewHolder {
-        val binding = CartItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return CartViewHolder(binding)
+        val binding = CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CartViewHolder(
+            binding,
+            onIncreaseQuantity, onDecreaseQuantity
+        )
     }
 
     override fun onBindViewHolder(
@@ -21,5 +27,6 @@ class CartAdapter: ListAdapter<CartItemEntity, CartViewHolder>(GenericDiffUtil({
         position: Int
     ) {
         holder.bind(getItem(position))
+
     }
 }

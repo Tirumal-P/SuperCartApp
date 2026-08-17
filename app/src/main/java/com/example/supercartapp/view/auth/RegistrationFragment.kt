@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentRegistrationBinding
+import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.repository.AuthRepositoryImpl
+import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
 import com.example.supercartapp.util.hideRest
@@ -25,8 +27,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     private lateinit var binding: FragmentRegistrationBinding
 
     private val authViewModel: AuthViewModel by viewModels {
-        val repository = AuthRepositoryImpl(ApiClient.apiService)
-        AuthViewModel.AuthViewModelFactory(repository)
+        val authRepository = AuthRepositoryImpl(ApiClient.apiService)
+        val database = SuperCartDatabase.getDatabase(requireContext())
+        val cartRepository = CartRepositoryImpl(database.cartDao())
+        AuthViewModel.AuthViewModelFactory(authRepository, cartRepository)
     }
 
     private var showPassword = false
@@ -71,27 +75,27 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 val registerMessage = StringBuilder()
                 if (!emailId.validateEmail()) {
                     etEmailId.requestFocus()
-                    registerMessage.append("Please Enter Valid Email.")
+                    registerMessage.append("-> Please Enter Valid Email.\n")
                 }
                 if (!password.validatePassword()) {
                     etPassword.requestFocus()
                     registerMessage.append(
-                        "\nPlease Enter Valid Password\n " +
-                                "Password must be at least 8 characters with at least 1 letter and 1 number."
+                        "-> Please Enter Valid Password\n" +
+                                "-> Password must be at least 8 characters with at least 1 letter and 1 number.\n"
                     )
                 }
                 if (!fullName.validateFullName()) {
                     etFullName.requestFocus()
                     registerMessage.append(
-                        "\nPlease Enter Valid Full Name\n " +
-                                "Full name must contain only letters and spaces."
+                        "-> Please Enter Valid Full Name\n" +
+                                "-> Full name must contain only letters and spaces.\n"
                     )
                 }
                 if (!mobileNumber.validatePhoneNumber()) {
                     etMobileNumber.requestFocus()
                     registerMessage.append(
-                        "\nPlease Enter Valid Phone Number\n " +
-                                "Phone number must contain 10 digits."
+                        "-> Please Enter Valid Phone Number\n" +
+                                "-> Phone number must contain 10 digits.\n"
                     )
                 }
                 if (registerMessage.isNotEmpty()) {

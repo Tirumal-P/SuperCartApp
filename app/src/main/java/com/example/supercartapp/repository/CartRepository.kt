@@ -21,4 +21,6 @@ interface CartRepository {
     fun getCartWithCartItemsByUserId(userId: Long): LiveData<CartWithCartItems?>
 
     suspend fun getActiveCartById(userId: Long): Long?
+
+    suspend fun ensureActiveCart(userId: Long)
 }

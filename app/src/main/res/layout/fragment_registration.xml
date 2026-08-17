@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_mobile_number"
             android:text="@string/text_mobile_number"
-            android:inputType="number"
             android:textColor="@color/content_secondary"
             android:layout_marginTop="@dimen/tv_et_top_margin"
             android:paddingBottom="@dimen/tv_et_bottom_padding"
@@ -43,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_height"
             android:id="@+id/et_mobile_number"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:padding="@dimen/et_padding"
             android:background="@drawable/edit_text_border"
             app:layout_constraintTop_toBottomOf="@id/tv_mobile_number"/>
@@ -80,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_height"
             android:id="@+id/et_password"
+            android:inputType="textPassword"
             android:padding="@dimen/et_padding"
             android:background="@drawable/edit_text_border"
             app:layout_constraintTop_toBottomOf="@id/tv_password"/>
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_registration_message"
             android:text="@string/text_registeration_message"
-            android:textSize="@dimen/header3_size"
+            android:textSize="@dimen/header4_size"
             android:textColor="@color/content_danger"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"

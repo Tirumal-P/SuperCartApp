@@ -1,9 +1,9 @@
 package com.example.supercartapp.repository
 
 import com.example.supercartapp.model.remote.request.LoginRequest
-import com.example.supercartapp.model.remote.request.LoginResponse
+import com.example.supercartapp.model.remote.response.LoginResponse
 import com.example.supercartapp.model.remote.request.RegisterRequest
-import com.example.supercartapp.model.remote.request.RegisterResponse
+import com.example.supercartapp.model.remote.response.RegisterResponse
 
 interface AuthRepository {
 

@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentLoginBinding
+import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.repository.AuthRepositoryImpl
+import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
 import com.example.supercartapp.util.hideRest
@@ -24,8 +26,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
 
     private val authViewModel: AuthViewModel by viewModels {
-        val repository = AuthRepositoryImpl(ApiClient.apiService)
-        AuthViewModel.AuthViewModelFactory(repository)
+        val authRepository = AuthRepositoryImpl(ApiClient.apiService)
+        val database = SuperCartDatabase.getDatabase(requireContext())
+        val cartRepository = CartRepositoryImpl(database.cartDao())
+        AuthViewModel.AuthViewModelFactory(authRepository, cartRepository)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
