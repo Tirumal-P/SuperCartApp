@@ -1,36 +1,29 @@
-package com.example.supercartapp.view.checkout.orderconfirmation
+package com.example.supercartapp.view.checkout.order
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
-import com.example.supercartapp.model.local.SuperCartDatabase
+import com.example.supercartapp.databinding.FragmentOrderConfirmationBinding
 import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.model.local.model.PaymentType
 import com.example.supercartapp.model.remote.ApiClient
-import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.repository.DeliveryRepositoryImpl
-import com.example.supercartapp.viewmodel.CartViewModel
+import com.example.supercartapp.repository.OrderRepositoryImpl
+import com.example.supercartapp.view.checkout.finalcart.FinalCartAdapter
 import com.example.supercartapp.viewmodel.CheckoutViewModel
 
 class OrderConfirmationFragment : Fragment(R.layout.fragment_order_confirmation) {
 
-    private lateinit var binding:
+    private lateinit var binding: FragmentOrderConfirmationBinding
     private lateinit var cartAdapter: FinalCartAdapter
 
-    private val cartViewModel: CartViewModel by viewModels {
-        val repository = CartRepositoryImpl(
-            SuperCartDatabase.getDatabase(requireContext()).cartDao()
-        )
-        CartViewModel.CartViewModelFactory(repository)
-    }
-
     private val checkoutViewModel: CheckoutViewModel by navGraphViewModels(R.id.nav_checkout) {
-        val repository = DeliveryRepositoryImpl(ApiClient.apiService)
-        CheckoutViewModel.DeliveryAddressViewModelFactory(repository)
+        val deliveryRepository = DeliveryRepositoryImpl(ApiClient.apiService)
+        val orderRepository = OrderRepositoryImpl(ApiClient.apiService)
+        CheckoutViewModel.CheckoutViewModelFactory(deliveryRepository, orderRepository)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +45,11 @@ class OrderConfirmationFragment : Fragment(R.layout.fragment_order_confirmation)
     private fun setUpObservers() {
 
         checkoutViewModel.orderId.observe(viewLifecycleOwner){ orderId ->
-            binding.tvOrderId.text = orderId.toString()
+            binding.tvOrderId.text = "#${orderId.toString()}"
+        }
+
+        checkoutViewModel.confirmedCartItems.observe(viewLifecycleOwner){ cartItems ->
+            setCartContent(cartItems)
         }
 
         checkoutViewModel.selectedAddress.observe(viewLifecycleOwner){ address ->
@@ -64,12 +61,6 @@ class OrderConfirmationFragment : Fragment(R.layout.fragment_order_confirmation)
 
         checkoutViewModel.selectedPaymentType.observe(viewLifecycleOwner){ paymentType ->
             binding.tvPaymentOption.text = getPaymentText(paymentType)
-        }
-
-        cartViewModel.cartWithItems.observe(viewLifecycleOwner){ cart ->
-            cart?.let {
-                setCartContent(it.cartItems)
-            }
         }
     }
 

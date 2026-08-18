@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.supercartapp.model.remote.response.CategoryItem
-import com.example.supercartapp.repository.SuperCartRepository
+import com.example.supercartapp.repository.ProductRepository
 import com.example.supercartapp.util.ApiType
 import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(val repository: SuperCartRepository): ViewModel() {
+class HomeViewModel(val repository: ProductRepository): ViewModel() {
 
     private val _categories = MutableLiveData<UiState<List<CategoryItem>>>()
     val categories: LiveData<UiState<List<CategoryItem>>>
@@ -33,7 +33,7 @@ class HomeViewModel(val repository: SuperCartRepository): ViewModel() {
             }
         }
     }
-    class HomeViewModelFactory(val repository: SuperCartRepository): ViewModelProvider.NewInstanceFactory(){
+    class HomeViewModelFactory(val repository: ProductRepository): ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
                 return HomeViewModel(repository) as T

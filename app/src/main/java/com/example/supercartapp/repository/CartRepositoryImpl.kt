@@ -46,4 +46,8 @@ class CartRepositoryImpl(val cartDao: CartDao): CartRepository {
         }
     }
 
+    override suspend fun makeCartInactive(cartId: Long): Int {
+        return cartDao.makeCartInactive(cartId)
+    }
+
 }

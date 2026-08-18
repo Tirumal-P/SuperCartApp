@@ -17,8 +17,8 @@ class AuthRepositoryImpl(val apiService: ApiService): AuthRepository {
         return apiService.registerUser(registerRequest)
     }
 
-    override suspend fun saveLogin(userId: Int) {
-        LoginPreferences.saveLogin(userId)
+    override suspend fun saveLogin(userId: Int, name: String, email: String, phone: String) {
+        LoginPreferences.saveLogin(userId, name, email, phone)
     }
 
     override suspend fun isLoggedIn(): Boolean {

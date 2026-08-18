@@ -15,7 +15,7 @@ import com.example.supercartapp.model.local.model.ProductListUiItem
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.model.remote.response.ProductItem
 import com.example.supercartapp.repository.CartRepositoryImpl
-import com.example.supercartapp.repository.SuperCartRepositoryImpl
+import com.example.supercartapp.repository.ProductRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
 import com.example.supercartapp.util.hideRest
@@ -27,7 +27,7 @@ class ProductListPageFragment : Fragment(R.layout.fragment_product_list_page) {
 
     private lateinit var binding: FragmentProductListPageBinding
     private val productListViewModel: ProductListViewModel by viewModels {
-        val repository = SuperCartRepositoryImpl(ApiClient.apiService)
+        val repository = ProductRepositoryImpl(ApiClient.apiService)
         ProductListViewModel.ProductListViewModelFactory(repository)
     }
 

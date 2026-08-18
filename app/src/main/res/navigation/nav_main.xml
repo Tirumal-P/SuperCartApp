@@ -47,4 +47,6 @@
 
     <include app:graph="@navigation/nav_checkout"/>
 
+    <include app:graph="@navigation/nav_order"/>
+
 </navigation>

@@ -40,6 +40,21 @@
         android:id="@+id/orderSummaryFragment"
         android:name="com.example.supercartapp.view.checkout.order.OrderSummaryFragment"
         android:label="Summary"
-        tools:layout="@layout/fragment_order_summary"/>
+        tools:layout="@layout/fragment_order_summary">
+        <action
+            android:id="@+id/action_orderSummaryFragment_to_orderConfirmationFragment"
+            app:destination="@id/orderConfirmationFragment" />
+    </fragment>
+
+    <fragment android:id="@+id/orderConfirmationFragment"
+        android:name="com.example.supercartapp.view.checkout.order.OrderConfirmationFragment"
+        android:label="Confirmation Page"
+        tools:layout="@layout/fragment_order_confirmation">
+        <action
+            android:id="@+id/action_orderConfirmationFragment_to_home_fragment"
+            app:destination="@id/home_fragment"
+            app:popUpTo="@id/nav_checkout"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

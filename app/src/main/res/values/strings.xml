@@ -78,4 +78,8 @@
     <string name="text_order_status_label">Order Status</string>
     <string name="text_order_id_value">#0</string>
     <string name="text_order_status_value">placed</string>
+    <string name="order_id">Order #1</string>
+    <string name="text_order_date">2022–01–16 23:45:34</string>
+    <string name="text_order_list_head">My Orders</string>
+    <string name="text_empty_orders">No orders found</string>
 </resources>

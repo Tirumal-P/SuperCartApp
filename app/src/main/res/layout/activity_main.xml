@@ -14,29 +14,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <com.google.android.material.appbar.MaterialToolbar
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:id="@+id/toolbar"
                     android:background="@color/primary"
                     app:title="SUPER CART"
                     app:titleCentered="true"
                     app:titleTextColor="@color/white"
                     app:navigationIcon="@drawable/back_icon"
                     app:navigationIconTint="@color/white"
-                    app:menu="@menu/tool_bar_menu" />
+                    app:menu="@menu/tool_bar_menu"
+                    app:layout_constraintTop_toTopOf="parent"/>
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/et_search_field"
                     android:hint="@string/text_search_hint"
                     android:layout_margin="@dimen/search_layout_margin"
                     android:padding="@dimen/et_padding"
                     android:background="@drawable/edit_text_border"
-                    android:visibility="gone"/>
-            </LinearLayout>
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_btn_search_inside_search_et"
+                    android:src="@drawable/search_icon"
+                    app:tint="@color/primary"
+                    android:layout_marginEnd="@dimen/et_padding"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/et_search_field"
+                    app:layout_constraintTop_toTopOf="@id/et_search_field"
+                    app:layout_constraintBottom_toBottomOf="@id/et_search_field"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_btn_close_inside_search_et"
+                    android:src="@drawable/close_icon"
+                    app:tint="@color/primary"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/tv_content_top_padding"
+                    app:layout_constraintEnd_toStartOf="@id/img_btn_search_inside_search_et"
+                    app:layout_constraintTop_toTopOf="@id/et_search_field"
+                    app:layout_constraintBottom_toBottomOf="@id/et_search_field"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,13 +78,16 @@
                 app:defaultNavHost="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/bn_bottom_nav"/>
-<!--            <androidx.fragment.app.FragmentContainerView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:id="@+id/fragment_container_view"-->
-<!--                app:defaultNavHost="true"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:layout_constraintBottom_toTopOf="@id/bn_bottom_nav"/>-->
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pb_main_activity"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
@@ -77,6 +106,7 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="@dimen/side_nav_size"
         android:layout_height="match_parent"
+        android:id="@+id/nv_side_nav"
         android:padding="@dimen/side_nav_layout_padding"
         app:headerLayout="@layout/side_nav_header"
         app:menu="@menu/side_nav_items"

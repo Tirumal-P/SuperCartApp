@@ -4,9 +4,10 @@ import com.example.supercartapp.model.remote.ApiService
 import com.example.supercartapp.model.remote.response.CategoryResponse
 import com.example.supercartapp.model.remote.response.ProductDetailsResponse
 import com.example.supercartapp.model.remote.response.ProductResponse
+import com.example.supercartapp.model.remote.response.SearchResponse
 import com.example.supercartapp.model.remote.response.SubCategoryResponse
 
-class SuperCartRepositoryImpl(val apiService: ApiService): SuperCartRepository {
+class ProductRepositoryImpl(val apiService: ApiService): ProductRepository {
 
     override suspend fun getCategories(): CategoryResponse {
         return apiService.getCategories()
@@ -22,5 +23,9 @@ class SuperCartRepositoryImpl(val apiService: ApiService): SuperCartRepository {
 
     override suspend fun getProductDetails(productId: Int): ProductDetailsResponse {
         return apiService.getProductDetails(productId)
+    }
+
+    override suspend fun searchProduct(searchText: String): SearchResponse {
+        return apiService.searchProduct(searchText)
     }
 }

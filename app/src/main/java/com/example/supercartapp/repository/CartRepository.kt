@@ -23,4 +23,6 @@ interface CartRepository {
     suspend fun getActiveCartById(userId: Long): Long?
 
     suspend fun ensureActiveCart(userId: Long)
+
+    suspend fun makeCartInactive(cartId: Long): Int
 }

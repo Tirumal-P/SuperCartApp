@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.supercartapp.model.local.entity.CartEntity
 import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.model.local.model.CartProduct
 import com.example.supercartapp.model.local.preferences.LoginPreferences
@@ -24,78 +23,6 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
         LoginPreferences.getUserId().toLong()
 
     val cartWithItems = repository.getCartWithCartItemsByUserId(userId)
-
-    fun insertCartItem(cartItem: CartItemEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _cartState.postValue(UiState.Loading)
-                val response = repository.insertCartItem(cartItem)
-                _cartState.postValue(UiState.Success(response))
-            }catch (e: Exception){
-                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-            }
-        }
-    }
-
-    fun updateCartItem(cartItem: CartItemEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _cartState.postValue(UiState.Loading)
-                val response = repository.updateCartItem(cartItem)
-                if(response !=0) {
-                    _cartState.postValue(UiState.Success(response.toLong()))
-                }else{
-                    _cartState.postValue(UiState.Error("Couldn't able to find cartItem Record with Id= ${cartItem.cartItemId}"))
-                }
-            }catch (e: Exception){
-                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-            }
-        }
-    }
-
-    fun deleteCartItem(cartItem: CartItemEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _cartState.postValue(UiState.Loading)
-                val response = repository.deleteCartItem(cartItem)
-                if(response !=0) {
-                    _cartState.postValue(UiState.Success(response.toLong()))
-                }else{
-                    _cartState.postValue(UiState.Error("Couldn't able to find cartItem Record with Id= ${cartItem.cartItemId}"))
-                }
-            }catch (e: Exception){
-                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-            }
-        }
-    }
-
-    fun insertCart(cartEntity: CartEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _cartState.postValue(UiState.Loading)
-                val response = repository.insertCart(cartEntity)
-                _cartState.postValue(UiState.Success(response))
-            }catch (e: Exception){
-                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-            }
-        }
-    }
-
-    fun updateCart(cartEntity: CartEntity){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _cartState.postValue(UiState.Loading)
-                val response = repository.updateCart(cartEntity)
-                if(response !=0) {
-                    _cartState.postValue(UiState.Success(response.toLong()))
-                }else{
-                    _cartState.postValue(UiState.Error("Couldn't able to find Cart Record with Id= ${cartEntity.cartId}"))
-                }
-            }catch (e: Exception){
-                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-            }
-        }
-    }
 
     fun cartItemIncreaseQuantity(cartItem: CartItemEntity){
         viewModelScope.launch(Dispatchers.IO) {
@@ -137,17 +64,6 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
         }
     }
 
-//    fun getCartId(userId: Int):Long{
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                val response = repository.getActiveCartById(1L)
-//                return@get userId
-//            }catch (e: Exception){
-//                e.printStackTrace()
-//            }
-//        }
-//    }
-
     fun addToCart(cartProduct: CartProduct){
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -169,21 +85,24 @@ class CartViewModel(val repository: CartRepository): ViewModel() {
         }
     }
 
-//    fun getCart(){
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                _cartState.postValue(UiState.Loading)
-//                val response = repository.getCartWithCartItemsByUserId(1)
-//                if(response != null){
-//                    _cartState.postValue(UiState.Success(response))
-//                }else{
-//                    _cartState.postValue(UiState.Error("Your Cart is Currently Empty"))
-//                }
-//            }catch (e: Exception){
-//                _cartState.postValue(UiState.Error(e.message?:"Something went wrong."))
-//            }
-//        }
-//    }
+    fun makeCartInactive(cartId: Long){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = repository.makeCartInactive(cartId)
+
+                if(response == 0){
+                    _cartState.postValue(
+                        UiState.Error("Couldn't able to update cart")
+                    )
+                }
+
+            }catch (e: Exception){
+                _cartState.postValue(
+                    UiState.Error(e.message ?: "Something went wrong")
+                )
+            }
+        }
+    }
 
     class CartViewModelFactory(val repository: CartRepository): ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

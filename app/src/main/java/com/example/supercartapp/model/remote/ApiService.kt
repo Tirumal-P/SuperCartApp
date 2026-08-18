@@ -9,9 +9,11 @@ import com.example.supercartapp.model.remote.response.AddAddressResponse
 import com.example.supercartapp.model.remote.response.RegisterResponse
 import com.example.supercartapp.model.remote.response.CategoryResponse
 import com.example.supercartapp.model.remote.response.AddressResponse
+import com.example.supercartapp.model.remote.response.OrderListResponse
 import com.example.supercartapp.model.remote.response.PlaceOrderResponse
 import com.example.supercartapp.model.remote.response.ProductDetailsResponse
 import com.example.supercartapp.model.remote.response.ProductResponse
+import com.example.supercartapp.model.remote.response.SearchResponse
 import com.example.supercartapp.model.remote.response.SubCategoryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -63,4 +65,14 @@ interface ApiService {
     suspend fun placeOrder(
         @Body orderRequest: PlaceOrderRequest
     ): PlaceOrderResponse
+
+    @GET("Product/search")
+    suspend fun searchProduct(
+        @Query("query") searchText: String
+    ): SearchResponse
+
+    @GET(" Order/userOrders/{user_id}")
+    suspend fun getOrderListByUserId(
+        @Path("user_id") userId: Int
+    ): OrderListResponse
 }

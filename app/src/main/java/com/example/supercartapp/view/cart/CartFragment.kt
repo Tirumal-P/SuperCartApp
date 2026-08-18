@@ -10,10 +10,13 @@ import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentCartBinding
 import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.local.entity.CartItemEntity
+import com.example.supercartapp.model.remote.ApiClient
+import com.example.supercartapp.repository.AuthRepositoryImpl
 import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
 import com.example.supercartapp.util.hideRest
+import com.example.supercartapp.util.show
 import com.example.supercartapp.viewmodel.CartViewModel
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
@@ -32,12 +35,16 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         setUpCartItemList()
         setUpObservers()
         setUpListeners()
+
+
+
     }
 
     private fun setUpListeners() {
         binding.acbtnChechkout.setOnClickListener {
             findNavController().navigate(R.id.action_cartFragment_to_nav_checkout)
         }
+        val repository = AuthRepositoryImpl(ApiClient.apiService)
     }
 
     private fun setUpCartItemList() {
@@ -70,9 +77,11 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             cartViewModel.cartWithItems.observe(viewLifecycleOwner) { cart ->
                 if (cart == null || cart.cartItems.isEmpty()) {
                     tvCartMessage.text = "Your Current Cart is Empty"
-                    tvCartMessage.hideRest(rvCartItemList, pbCartProgress)
+                    binding.tvCartTotal.text = "$0"
+                    tvCartMessage.hideRest(rvCartItemList, pbCartProgress, acbtnChechkout)
                 } else {
                     rvCartItemList.hideRest(tvCartMessage, pbCartProgress)
+                    acbtnChechkout.show()
                     setContent(cart.cartItems)
                 }
             }

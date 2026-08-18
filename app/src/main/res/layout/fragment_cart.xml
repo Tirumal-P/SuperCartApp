@@ -60,6 +60,7 @@
             android:id="@+id/tv_cart_message"
             android:visibility="gone"
             android:text="@string/text_cart_empty_message"
+            android:paddingTop="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

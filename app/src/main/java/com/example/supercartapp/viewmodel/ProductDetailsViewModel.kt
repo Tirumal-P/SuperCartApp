@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.supercartapp.model.remote.response.Product
-import com.example.supercartapp.repository.SuperCartRepository
+import com.example.supercartapp.repository.ProductRepository
 import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductDetailsViewModel(val repository: SuperCartRepository): ViewModel() {
+class ProductDetailsViewModel(val repository: ProductRepository): ViewModel() {
 
     private val _productDetails = MutableLiveData<UiState<Product>>()
 
@@ -43,7 +43,7 @@ class ProductDetailsViewModel(val repository: SuperCartRepository): ViewModel() 
         }
     }
 
-    class ProductDetailsViewModelFactory(val repository: SuperCartRepository): ViewModelProvider.NewInstanceFactory(){
+    class ProductDetailsViewModelFactory(val repository: ProductRepository): ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(ProductDetailsViewModel::class.java)){
                 return ProductDetailsViewModel(repository) as T

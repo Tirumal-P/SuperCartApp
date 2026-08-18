@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.supercartapp.model.remote.response.ProductItem
 import com.example.supercartapp.model.remote.response.SubcategoryItem
-import com.example.supercartapp.repository.SuperCartRepository
+import com.example.supercartapp.repository.ProductRepository
 import com.example.supercartapp.util.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductListViewModel(val repository: SuperCartRepository): ViewModel(){
+class ProductListViewModel(val repository: ProductRepository): ViewModel(){
 
     private val _subCategories = MutableLiveData<UiState<List<SubcategoryItem>>>()
     val subCategories :LiveData<UiState<List<SubcategoryItem>>>
@@ -71,7 +71,7 @@ class ProductListViewModel(val repository: SuperCartRepository): ViewModel(){
         }
     }
 
-    class ProductListViewModelFactory(val repository: SuperCartRepository): ViewModelProvider.NewInstanceFactory(){
+    class ProductListViewModelFactory(val repository: ProductRepository): ViewModelProvider.NewInstanceFactory(){
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(ProductListViewModel::class.java)){
                 return ProductListViewModel(repository) as T

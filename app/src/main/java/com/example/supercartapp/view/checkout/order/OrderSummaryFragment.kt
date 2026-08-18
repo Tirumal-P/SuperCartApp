@@ -2,9 +2,11 @@ package com.example.supercartapp.view.checkout.order
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
@@ -12,10 +14,12 @@ import com.example.supercartapp.databinding.FragmentOrderSummaryBinding
 import com.example.supercartapp.model.local.SuperCartDatabase
 import com.example.supercartapp.model.local.entity.CartItemEntity
 import com.example.supercartapp.model.local.model.PaymentType
+import com.example.supercartapp.model.local.relation.CartWithCartItems
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.repository.CartRepositoryImpl
 import com.example.supercartapp.repository.DeliveryRepositoryImpl
 import com.example.supercartapp.repository.OrderRepositoryImpl
+import com.example.supercartapp.util.UiState
 import com.example.supercartapp.view.checkout.finalcart.FinalCartAdapter
 import com.example.supercartapp.viewmodel.CartViewModel
 import com.example.supercartapp.viewmodel.CheckoutViewModel
@@ -24,6 +28,9 @@ class OrderSummaryFragment : Fragment(R.layout.fragment_order_summary) {
 
     private lateinit var binding: FragmentOrderSummaryBinding
     private lateinit var cartAdapter: FinalCartAdapter
+
+    private var currentCart: CartWithCartItems? = null
+    private var totalAmount = 0
 
     private val cartViewModel: CartViewModel by viewModels {
         val repository = CartRepositoryImpl(
@@ -37,8 +44,6 @@ class OrderSummaryFragment : Fragment(R.layout.fragment_order_summary) {
         val orderRepository = OrderRepositoryImpl(ApiClient.apiService)
         CheckoutViewModel.CheckoutViewModelFactory(deliveryRepository, orderRepository)
     }
-
-    var totalAmount = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,11 +60,17 @@ class OrderSummaryFragment : Fragment(R.layout.fragment_order_summary) {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        binding.header.tvSummaryStep.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+
+        binding.header.tvSummaryStep.setTextColor(
+            ContextCompat.getColor(requireContext(), R.color.primary)
+        )
     }
 
     private fun setUpObservers() {
+
         cartViewModel.cartWithItems.observe(viewLifecycleOwner){ cart ->
+            currentCart = cart
+
             cart?.let {
                 setCartContent(it.cartItems)
             }
@@ -74,6 +85,39 @@ class OrderSummaryFragment : Fragment(R.layout.fragment_order_summary) {
 
         checkoutViewModel.selectedPaymentType.observe(viewLifecycleOwner){ paymentType ->
             binding.tvPaymentOption.text = getPaymentText(paymentType)
+        }
+
+        checkoutViewModel.placeOrderState.observe(viewLifecycleOwner){ state ->
+            when(state){
+
+                is UiState.Loading -> {
+                    binding.btnConfirmOrder.isEnabled = false
+                }
+
+                is UiState.Success -> {
+                    binding.btnConfirmOrder.isEnabled = true
+
+                    val cart = currentCart ?: return@observe
+
+                    cartViewModel.makeCartInactive(
+                        cart.cartEntity.cartId
+                    )
+
+                    findNavController().navigate(
+                        R.id.action_orderSummaryFragment_to_orderConfirmationFragment
+                    )
+                }
+
+                is UiState.Error -> {
+                    binding.btnConfirmOrder.isEnabled = true
+
+                    Toast.makeText(
+                        requireContext(),
+                        state.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -99,9 +143,17 @@ class OrderSummaryFragment : Fragment(R.layout.fragment_order_summary) {
 
     private fun setUpEventHandling() {
         binding.btnConfirmOrder.setOnClickListener {
-            cartViewModel.cartWithItems.value?.let {
-                checkoutViewModel.placeOrder(cartItems = it.cartItems, totalAmount)
-            }
+
+            val cart = currentCart ?: return@setOnClickListener
+
+            checkoutViewModel.setConfirmationCartItems(
+                cart.cartItems
+            )
+
+            checkoutViewModel.placeOrder(
+                cartItems = cart.cartItems,
+                total = totalAmount
+            )
         }
     }
 }

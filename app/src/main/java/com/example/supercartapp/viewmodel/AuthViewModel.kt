@@ -34,7 +34,8 @@ class AuthViewModel(val authRepository: AuthRepository, val cartRepository: Cart
                 val response = authRepository.loginUser(loginRequest)
                 if(response.status==0){
                     if(response.user != null){
-                        authRepository.saveLogin(response.user.userId.toInt())
+                        val user = response.user
+                        authRepository.saveLogin(user.userId.toInt(), user.fullName, user.emailId, user.mobileNo)
                         cartRepository.ensureActiveCart(response.user.userId.toLong())
                         _loginState.postValue(UiState.Success(response))
                     }else{

@@ -11,7 +11,7 @@ interface AuthRepository {
 
     suspend fun registerUser(registerRequest: RegisterRequest): RegisterResponse
 
-    suspend fun saveLogin(userId: Int)
+    suspend fun saveLogin(userId: Int, name: String, email: String, phone: String)
 
     suspend fun isLoggedIn(): Boolean
 

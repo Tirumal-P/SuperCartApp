@@ -10,7 +10,7 @@ import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentHomeBinding
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.model.remote.response.CategoryItem
-import com.example.supercartapp.repository.SuperCartRepositoryImpl
+import com.example.supercartapp.repository.ProductRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hideRest
 import com.example.supercartapp.viewmodel.HomeViewModel
@@ -19,7 +19,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryAdapter: CategoryAdapter
     private val homeViewModel: HomeViewModel by viewModels {
-        val repository = SuperCartRepositoryImpl(ApiClient.apiService)
+        val repository = ProductRepositoryImpl(ApiClient.apiService)
         HomeViewModel.HomeViewModelFactory(repository)
     }
 

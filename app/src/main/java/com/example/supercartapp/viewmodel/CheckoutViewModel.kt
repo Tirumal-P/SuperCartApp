@@ -52,6 +52,18 @@ class CheckoutViewModel(
     private val userId: Long =
         LoginPreferences.getUserId().toLong()
 
+    private val _confirmedCartItems = MutableLiveData<List<CartItemEntity>>()
+    val confirmedCartItems: LiveData<List<CartItemEntity>>
+        get() = _confirmedCartItems
+
+    private val _orderId = MutableLiveData<Long?>()
+    val orderId: LiveData<Long?>
+        get() = _orderId
+
+    fun setConfirmationCartItems(cartItems: List<CartItemEntity>){
+        _confirmedCartItems.value = cartItems
+    }
+
     fun getUserAddress() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -110,6 +122,7 @@ class CheckoutViewModel(
                 val response = orderRepository.placeOrder(orderRequest)
 
                 if (response.orderId != null) {
+                    _orderId.postValue(response.orderId.toLong())
                     _placeOrderState.postValue(UiState.Success(response))
                 } else {
                     _placeOrderState.postValue(UiState.Error(response.message))

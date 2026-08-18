@@ -9,7 +9,7 @@ import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentProductListBinding
 import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.model.remote.response.SubcategoryItem
-import com.example.supercartapp.repository.SuperCartRepositoryImpl
+import com.example.supercartapp.repository.ProductRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hide
 import com.example.supercartapp.util.hideRest
@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class ProductListFragment : Fragment(R.layout.fragment_product_list) {
     private lateinit var binding: FragmentProductListBinding
     private val productListViewModel: ProductListViewModel by viewModels {
-        val repository = SuperCartRepositoryImpl(ApiClient.apiService)
+        val repository = ProductRepositoryImpl(ApiClient.apiService)
         ProductListViewModel.ProductListViewModelFactory(repository)
     }
 

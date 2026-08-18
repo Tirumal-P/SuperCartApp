@@ -15,7 +15,7 @@ import com.example.supercartapp.model.remote.ApiClient
 import com.example.supercartapp.model.remote.response.Image
 import com.example.supercartapp.model.remote.response.Product
 import com.example.supercartapp.repository.CartRepositoryImpl
-import com.example.supercartapp.repository.SuperCartRepositoryImpl
+import com.example.supercartapp.repository.ProductRepositoryImpl
 import com.example.supercartapp.util.UiState
 import com.example.supercartapp.util.hideRest
 import com.example.supercartapp.viewmodel.CartViewModel
@@ -25,7 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
     private lateinit var binding: FragmentProductDetailsBinding
     private val productDetailsViewModel : ProductDetailsViewModel by viewModels {
-        val repository = SuperCartRepositoryImpl(ApiClient.apiService)
+        val repository = ProductRepositoryImpl(ApiClient.apiService)
         ProductDetailsViewModel.ProductDetailsViewModelFactory(repository)
     }
 

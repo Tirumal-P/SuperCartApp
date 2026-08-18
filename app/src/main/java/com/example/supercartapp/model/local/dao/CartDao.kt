@@ -38,4 +38,7 @@ interface CartDao {
 
     @Query("SELECT cartId FROM Carts WHERE userId= :userId AND isActive LIMIT 1")
     fun getActiveCartId(userId: Long): Long?
+
+    @Query("UPDATE Carts SET isActive = 0 WHERE cartId = :cartId")
+    suspend fun makeCartInactive(cartId: Long): Int
 }
