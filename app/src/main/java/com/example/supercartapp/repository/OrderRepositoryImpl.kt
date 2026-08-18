@@ -2,6 +2,7 @@ package com.example.supercartapp.repository
 
 import com.example.supercartapp.model.remote.ApiService
 import com.example.supercartapp.model.remote.request.PlaceOrderRequest
+import com.example.supercartapp.model.remote.response.OrderDetailsResponse
 import com.example.supercartapp.model.remote.response.OrderListResponse
 import com.example.supercartapp.model.remote.response.PlaceOrderResponse
 
@@ -12,5 +13,9 @@ class OrderRepositoryImpl(val apiService: ApiService): OrderRepository {
 
     override suspend fun getOrderListByUserId(userId: Int): OrderListResponse {
         return apiService.getOrderListByUserId(userId)
+    }
+
+    override suspend fun getOrderDetails(orderId: Int): OrderDetailsResponse {
+        return apiService.getOrderDetails(orderId)
     }
 }

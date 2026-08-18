@@ -229,7 +229,6 @@ class MainActivity : AppCompatActivity() {
         tvUserEmail.text = LoginPreferences.getUserEmail()
         tvUserPhone.text = LoginPreferences.getUserPhone()
 
-
         binding.nvSideNav.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.order_menu -> {

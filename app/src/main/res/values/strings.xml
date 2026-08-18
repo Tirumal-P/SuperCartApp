@@ -82,4 +82,8 @@
     <string name="text_order_date">2022–01–16 23:45:34</string>
     <string name="text_order_list_head">My Orders</string>
     <string name="text_empty_orders">No orders found</string>
+    <string name="order_date_label">Order Date</string>
+    <string name="purchase_items_label">Purchase Items</string>
+    <string name="text_total_bill_amount_label">Total Bill Amount</string>
+    <string name="text_order_details_message">Unable to load order details</string>
 </resources>

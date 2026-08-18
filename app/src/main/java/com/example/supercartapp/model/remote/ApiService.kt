@@ -9,6 +9,7 @@ import com.example.supercartapp.model.remote.response.AddAddressResponse
 import com.example.supercartapp.model.remote.response.RegisterResponse
 import com.example.supercartapp.model.remote.response.CategoryResponse
 import com.example.supercartapp.model.remote.response.AddressResponse
+import com.example.supercartapp.model.remote.response.OrderDetailsResponse
 import com.example.supercartapp.model.remote.response.OrderListResponse
 import com.example.supercartapp.model.remote.response.PlaceOrderResponse
 import com.example.supercartapp.model.remote.response.ProductDetailsResponse
@@ -75,4 +76,9 @@ interface ApiService {
     suspend fun getOrderListByUserId(
         @Path("user_id") userId: Int
     ): OrderListResponse
+
+    @GET("Order?order_id")
+    suspend fun getOrderDetails(
+        @Query("order_id") orderId: Int
+    ): OrderDetailsResponse
 }

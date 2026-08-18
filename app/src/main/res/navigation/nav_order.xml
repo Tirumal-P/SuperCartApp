@@ -10,5 +10,22 @@
         android:name="com.example.supercartapp.view.order.OrderListFragment"
         android:label="Orders"
         tools:layout="@layout/fragment_order_list">
+
+        <action
+            android:id="@+id/action_orderListFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.example.supercartapp.view.order.OrderDetailsFragment"
+        android:label="Order Details"
+        tools:layout="@layout/fragment_order_details">
+
+        <argument
+            android:name="orderId"
+            app:argType="integer"/>
+
     </fragment>
 </navigation>

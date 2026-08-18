@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supercartapp.R
 import com.example.supercartapp.databinding.FragmentOrderListBinding
@@ -71,5 +72,12 @@ class OrderListFragment : Fragment(R.layout.fragment_order_list) {
     }
 
     private fun onOrderClick(order: Order){
+        val action =
+            OrderListFragmentDirections
+                .actionOrderListFragmentToOrderDetailsFragment(
+                    order.orderId.toInt()
+                )
+
+        findNavController().navigate(action)
     }
 }
